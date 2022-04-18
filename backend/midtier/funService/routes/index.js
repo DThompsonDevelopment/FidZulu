@@ -2,8 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/fun/team', function(req, res, next) {
+  const team = {
+    'team': 'Fun Team',
+    'membersnames': ['Vahe', 'Peter', 'Mike']
+};
+res.end(JSON.stringify(team));
 });
 
 module.exports = router;
