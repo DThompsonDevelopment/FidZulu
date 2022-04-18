@@ -30,24 +30,12 @@ router.get("/dvds/all/:location", (req,res,next) => {
       }
 
 })
-
-
-// router.get('/dvdtest/team', (request, response, next) => {
-//     response.send('Returns all json object with team name and all team members names');
-//    });
-   
    router.get('/dvd/team', (request, response, next) => {
-
-   // let get_params = url.parse(request.url, true).query;
-
     if (Object.keys(dvdteam).length ==0 ){
-
         next(createError(204));
-    
     }else{
         console.log('got into dvd');
         response.end(JSON.stringify(dvdteam.list()));
     }
   });
-
 module.exports = router;
