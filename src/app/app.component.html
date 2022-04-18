@@ -2,5 +2,13 @@
   <h1>{{ title }}</h1>
 </header>
 <main>
+  <select [ngModel]="category" (ngModelChange)="onChange($event)">
+    <option [ngValue]="'bikes'">Bikes</option>
+    <option [ngValue]="'books'">Books</option>
+    <option [ngValue]="'dvds'">DVDs</option>
+    <option [ngValue]="'food'">Food</option>
+    <option [ngValue]="'laptops'">Laptops</option>
+    <option [ngValue]="'toys'">Toys</option>
+  </select>
   <app-table [items]="items"></app-table>
 </main>

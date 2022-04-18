@@ -4,10 +4,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { TableComponent } from './components/table/table.component';
 import { ReplaceUnderscoresPipe } from './pipes/replace-underscores.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, TableComponent, ReplaceUnderscoresPipe],
-  imports: [BrowserModule, HttpClientModule],
+  imports: [BrowserModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
