@@ -1,6 +1,7 @@
 const fs = require("fs");
 var express = require('express');
 var router = express.Router();
+const createError = require('http-errors');
 
 const foodDataPath = "../../../../Foodjson.json";
 
@@ -31,7 +32,13 @@ router.get('/food/all/:location', (req, res) => {
     tax = 0.08; //8% Tax
   } else {
     //Throw error
-    console.log("else")
+    console.log("Caught exception.");
+
+    res.status(404);
+    res.json({
+      "error": "No resources found",
+      "message": "Cannot locate"
+    })
   }
 
   let data = readFoodDataSync();
