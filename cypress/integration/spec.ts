@@ -28,7 +28,10 @@ describe('My First Test', () => {
     cy.get('tbody')
       .contains('Silver');
     
-    //CHECK FOR CORRECT PRICE
+    //CHECK FOR CORRECT PRICE With Tax
+    cy.get('tbody')
+      .contains(237.96);
+
   })
 
 
@@ -57,9 +60,6 @@ describe('My First Test', () => {
       .contains(5.87)
       .should('not.exist');
       //CHECK FOR CORRECT PRICE
-
-
-    
   })
 
   //Get All Toys
@@ -88,6 +88,8 @@ describe('My First Test', () => {
       .should('not.exist');
 
     //CHECK FOR CORRECT PRICE
+    cy.get('tbody')
+      .contains(35.99);
   })
   
 })
@@ -154,10 +156,6 @@ describe('Class B Service Tests', () => {
     cy.get('tbody')
       .contains(19.98)
       .should('not.exist');
-      //CHECK FOR CORRECT PRICE
-
-
-    
   })
 
   //Get All Laptops
@@ -184,8 +182,6 @@ describe('Class B Service Tests', () => {
     cy.get('tbody')
       .contains(459.98)
       .should('not.exist');
-    
-    //CHECK FOR CORRECT PRICE
   })
   
 })
