@@ -1,8 +1,7 @@
 const request = require("request");
 const base_url = 'http://localhost:3022/media/';
-const usnc_url = base_url + 'laptops?location=US-NC';
-const ie_url = base_url + 'laptops?location=IE';
-const in_url = base_url + 'laptops?location=IN';
+const durham_url = base_url + 'books/all/durham';
+const raleigh_url = base_url + 'books/all/raleigh';
 
 
 
@@ -10,7 +9,7 @@ const in_url = base_url + 'laptops?location=IN';
 describe("Testing laptops Endpoints", () => {
     //negative testing
     //bad requests returns 400
-    describe("GET media/laptops?location=<location>", () => {
+    describe("GET media/laptops", () => {
         it("returns 400 on missing location", (done) => {
             request.get(base_url+'laptops', (error, response, body) => {
                 expect(response.statusCode).toBe(400);
@@ -18,7 +17,7 @@ describe("Testing laptops Endpoints", () => {
             });
         });
         it("returns 404 on unknown arguments", (done) => {
-            request.get(base_url+'laptops?country=mexico', (error, response, body) => {
+            request.get(base_url+'laptops/all/notreallocation', (error, response, body) => {
                 expect(response.statusCode).toBe(404);
                 done();
             });
@@ -26,21 +25,9 @@ describe("Testing laptops Endpoints", () => {
     });
 
     //happy path
-    describe("GET media/laptops?location=US-NC", () => {
+    describe("GET media/laptops/all/durham", () => {
         it("returns a list of laptops", (done) => {
-            request.get(usnc_url, (error, response, body) => {
-                expect(response.statusCode).toBe(200)
-                //check contents of body to ensure a list of laptops
-                expect(body).toBeTruthy();
-                expect(body).toContain("");
-                done();
-            });
-        });
-    });
-
-    describe("GET media/laptops?location=IE", () => {
-        it("returns a list of laptops", (done) => {
-            request.get(usnc_url, (error, response, body) => {
+            request.get(durham_url, (error, response, body) => {
                 expect(response.statusCode).toBe(200)
                 //check contents of body to ensure a list of laptops
                 expect(JSON.parse(body).length).toBe(4);
@@ -51,9 +38,9 @@ describe("Testing laptops Endpoints", () => {
         });
     });
 
-    describe("GET media/laptops?location=IN", () => {
+    describe("GET media/laptops/all/raleigh", () => {
         it("returns a list of laptops", (done) => {
-            request.get(usnc_url, (error, response, body) => {
+            request.get(raleigh_url, (error, response, body) => {
                 expect(response.statusCode).toBe(200)
                 //check contents of body to ensure a list of laptops
                 expect(JSON.parse(body).length).toBe(4);

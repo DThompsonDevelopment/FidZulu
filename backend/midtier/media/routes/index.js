@@ -18,8 +18,8 @@ router.get('/media/team', (req, res, next) => {
 })
 
 // books endpoint
-router.get('/media/books', async function(req, res, next) {
-  let location = req.query.location;
+router.get('/media/books/all/:location', async function(req, res, next) {
+  const location = req.params.location
   let endpoint_res = await axios.get('', {
     'params': {
       'location': location
@@ -29,12 +29,14 @@ router.get('/media/books', async function(req, res, next) {
 });
 
 //dvds endpoint
-router.get('/media/dvds', function(req, res, next) {
+router.get('/media/dvds/all/:location', function(req, res, next) {
+  const location = req.params.location
   let params = url.parse(request.url, true).query;
 });
 
 //laptops endpoint
-router.get('/media/laptops', function(req, res, next) {
+router.get('/media/laptops/all/:location', function(req, res, next) {
+  const location = req.params.location
   let params = url.parse(request.url, true).query;
 });
 
