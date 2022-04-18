@@ -21,4 +21,11 @@ router.get("/bikes/team", function (req, res, next) {
   res.send(returnJson);
 });
 
+router.get("/bikes/add", function (req, res, next) {
+ 
+  console.log("got into /bikes/add");
+
+  res.send(returnJson);
+});
+
 module.exports = router;
