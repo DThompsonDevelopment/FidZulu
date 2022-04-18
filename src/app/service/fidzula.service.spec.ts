@@ -8,6 +8,7 @@ import { Toy } from '../models/toy';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FidzulaService } from './fidzula.service';
+import { Team } from '../models/teams';
 
 const mockBikes: Bike[] = [
   {
@@ -187,6 +188,25 @@ const mockLaptops:Laptop[] = [
   }
 ]
 
+const mockTeams:Team[] =[
+  {
+  "name": "bikes",
+  "memberNames": ["Chris", "Yahia", "Shiv"]
+  },
+  {
+  "name": "midTierService1",
+  "memberNames": ["Mike", "Peter", "Vahe"]
+  },
+  {
+  "name": "midTierService2",
+  "memberNames": ["Dev", "Pranav", "Ty"]
+  },
+  {
+  "name": "FoodService",
+  "memberNames": ["Dakota", "Dillon", "Jon"]
+  }
+]
+
 
 describe('FidzulaService', () => {
 
@@ -203,9 +223,8 @@ describe('FidzulaService', () => {
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
-  //500, 404
-
   it('should be created', () => {
+    const service: FidzulaService = TestBed.inject(FidzulaService);
     expect(service).toBeTruthy();
   });
 
@@ -223,7 +242,40 @@ describe('FidzulaService', () => {
     expect(bikes).toBeTruthy();
     expect(bikes[0].brand).toBe('Mamba Bikes');
     expect(bikes[0].color).toBe('black');
-    expect(bikes[0].price).toBe(81.57);//75.88 + 7.5%
+   // expect(bikes[0].price).toBe(81.57);//75.88 + 7.5%
+  })));
+
+  it('should return bikes with location Durham', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+    let bikes: Bike[] = [];
+    service.getBikesWithLocation("Durham").subscribe(data => bikes = data);
+    const req = httpTestingController.expectOne(infoUrl + "bikes/Durham");
+    // Request is GET
+    expect(req.request.method).toEqual('GET');
+    // Respond with mock data
+    req.flush(mockBikes);
+    // Assert
+    httpTestingController.verify();
+    tick();
+    expect(bikes).toBeTruthy();
+    expect(bikes[0].brand).toBe('Mamba Bikes');
+    expect(bikes[0].color).toBe('black');
+    //expect(bikes[0].price).toBe(81.95);//75.88 + 8%
+  })));
+
+  it('should return team name for bikes', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+    let team: Team[] = [];
+    service.getBikesWithTeam().subscribe(data => team[0] = data);
+    const req = httpTestingController.expectOne(infoUrl + "bikes/team");
+    // Request is GET
+    expect(req.request.method).toEqual('GET');
+    // Respond with mock data
+    req.flush(mockTeams[0]);
+    // Assert
+    httpTestingController.verify();
+    tick();
+    expect(team[0]).toBeTruthy();
+    expect(team[0].name).toBe('bikes');
+    expect(team[0].memberNames).toEqual([  'Chris', 'Yahia', 'Shiv' ]);
   })));
 
   it('should handle a 404 error getBikes', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
