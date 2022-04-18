@@ -21,6 +21,6 @@ exports.query_with_salesTax = (param) => {
         dvd.price = Math.round(price * 100) / 100;
       });
 
-    console.log(json_result);
+    //console.log(json_result);
     return json_result;
 };
