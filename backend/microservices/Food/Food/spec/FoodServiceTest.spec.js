@@ -1,6 +1,6 @@
 let request = require("request");
 
-const base_url = "http://localhost:3032/fun/";
+const base_url = "http://localhost:3032/";
 
 console.log("Starting FoodService test");
 
