@@ -1,9 +1,13 @@
-var express = require('express');
-var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+const express = require('express');
+const router = express.Router();
+const createError = require('http-errors');
+const contacts = require('../modules/dvd');
+const url = require('url');
+
+router.get('/ping', (request, response, next) => {
+ response.send('Hello From Service');
 });
+
 
 module.exports = router;
