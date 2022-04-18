@@ -1,5 +1,9 @@
 const fs = require('fs');
 
+const LocationsalesTax = {
+    raleigh: 0.075,
+    durham: 0.08,
+  };
 let read_json_file = () => {
     let file = './data/DVDsjson.json';
     return fs.readFileSync(file);
@@ -9,20 +13,14 @@ exports.list = () => {
     return JSON.parse(read_json_file());
 };
 
-exports.query_by_arg = (arg, value) => {
+exports.query_with_salesTax = (param) => {
     let json_result = JSON.parse(read_json_file());
-    // all addresses are stored in a "result" object
-    let result = json_result.result;
-    console.log("query by arg: " + arg + " " + value);
-    for (let i = 0; i < result.length; i++) {
-        let contact = result[i];
-        if (contact[arg] === undefined){
-            throw new Error("Unknown parameter " + arg);
-        }
-        if (contact[arg] === value) {
-            return contact;
-        }
+    console.log("query with salesTax: ");
+    json_result.forEach((dvd) => {
+        let price = dvd.price * (1 + LocationsalesTax[param]);
+        dvd.price = Math.round(price * 100) / 100;
+      });
 
-    }
-    return null;
+    console.log(json_result);
+    return json_result;
 };
