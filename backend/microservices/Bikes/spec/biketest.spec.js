@@ -1,5 +1,7 @@
 let request = require("request");
+var fs = require('fs');
 const { parseJSONFile, getJSON, applyTax } = require("../utils/bikeDao");
+var _ = require('lodash');
 const base_url = "http://localhost:3031/";
 console.log("Starting test");
 
@@ -56,6 +58,19 @@ const alteredBikes = [
     price: 237.96,
   },
 ];
+
+let beforeJson;
+let afterJson;
+
+beforeEach(()=>{
+    beforeJson = parseJSONFile("./data/Bikejson.json");
+});
+afterEach(()=>{
+    afterJson = parseJSONFile("./data/Bikejson.json");
+     if(!_.isEqual(beforeJson, afterJson)){ 
+        fs.writeFileSync("./data/Bikejson.json",JSON.stringify(beforeJson));
+     }
+});
 
 describe("Testing HTTP Endpoints", () => {
   describe("Testing /bikes/all/:location", () => {
@@ -151,6 +166,12 @@ describe("Testing HTTP Endpoints", () => {
         expect(JSON.parse(body)).toEqual(team);
         done();
       });
+    });
+
+    describe("Testing /bikes/add", () => {
+
+
+
     });
   });
 });

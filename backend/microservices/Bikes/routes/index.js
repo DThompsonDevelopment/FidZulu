@@ -1,7 +1,11 @@
-const {applyTax, getJSON } = require("../utils/bikeDao");
-
+const {applyTax, getJSON, addBike } = require("../utils/bikeDao");
+var fs = require('fs');
 var express = require("express");
 var router = express.Router();
+
+const app = express();
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
 
 router.get("/bikes/all/:location", function (req, res, next) {
   const param = req.params.location;
@@ -21,11 +25,12 @@ router.get("/bikes/team", function (req, res, next) {
   res.send(returnJson);
 });
 
-router.get("/bikes/add", function (req, res, next) {
+router.post("/bikes/add", function (req, res, next) {
  
   console.log("got into /bikes/add");
+  json = addBike(req.body);
 
-  res.send(returnJson);
+  res.send(json);
 });
 
 module.exports = router;

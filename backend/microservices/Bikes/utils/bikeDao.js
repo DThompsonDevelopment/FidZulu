@@ -45,10 +45,29 @@ const getJSON = (param, next) => {
 
     return bikes;
   }
-};
+
+  };
+
+  const getJSONPost = () => {
+
+    const bikes = parseJSONFile("./data/Bikejson.json");
+
+    return bikes;
+  };
+
+  function addBike(body){
+    var json = getJSONPost();
+    json.push(body);
+    console.log(json);
+
+    fs.writeFileSync("./data/Bikejson.json",JSON.stringify(json));
+
+    return json;
+  };
 
 module.exports = {
   parseJSONFile,
   applyTax,
   getJSON,
+  addBike
 };
