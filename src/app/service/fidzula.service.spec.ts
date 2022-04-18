@@ -205,11 +205,10 @@ const mockTeams: Team[] = [
     memberNames: ['Dev', 'Pranav', 'Ty'],
   },
   {
-  "name": "food",
-  "memberNames": ["Dakota", "Dillon", "Jon"]
-  }
-]
-
+    name: 'food',
+    memberNames: ['Dakota', 'Dillon', 'Jon'],
+  },
+];
 
 describe('FidzulaService', () => {
   let httpTestingController: HttpTestingController;
@@ -252,7 +251,6 @@ describe('FidzulaService', () => {
     })
   ));
 
-<<<<<<< HEAD
   it('should return bikes with location Durham', inject(
     [FidzulaService],
     fakeAsync((service: FidzulaService) => {
@@ -269,124 +267,125 @@ describe('FidzulaService', () => {
       httpTestingController.verify();
       tick();
       expect(bikes).toBeTruthy();
+      expect(bikes[0].name).toBe('Mamba Sport 12" Balance Bike');
       expect(bikes[0].brand).toBe('Mamba Bikes');
       expect(bikes[0].color).toBe('black');
-      //expect(bikes[0].price).toBe(81.95);//75.88 + 8%
+      expect(bikes[0].price).toBe(75.88);
     })
   ));
-=======
-  it('should return bikes with location Durham', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
-    let bikes: Bike[] = [];
-    service.getBikesWithLocation("Durham").subscribe(data => bikes = data);
-    const req = httpTestingController.expectOne(infoUrl + "bikes/Durham");
-    // Request is GET
-    expect(req.request.method).toEqual('GET');
-    // Respond with mock data
-    req.flush(mockBikes);
-    // Assert
-    httpTestingController.verify();
-    tick();
-    expect(bikes).toBeTruthy();
-    expect(bikes[0].name).toBe('Mamba Sport 12\" Balance Bike');
-    expect(bikes[0].brand).toBe('Mamba Bikes');
-    expect(bikes[0].color).toBe('black');
-    expect(bikes[0].price).toBe(75.88);
-  })));
 
-  it('should return foods with location Durham', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
-    let food: Food[] = [];
-    service.getFoodsWithLocation("Durham").subscribe(data => food = data);
-    const req = httpTestingController.expectOne(infoUrl + "food/Durham");
-    // Request is GET
-    expect(req.request.method).toEqual('GET');
-    // Respond with mock data
-    req.flush(mockFoods);
-    // Assert
-    httpTestingController.verify();
-    tick();
-    expect(food).toBeTruthy();
-    expect(food[0].name).toBe('The Original Sandwich');
-    expect(food[0].brand).toBe('Oreo');
-    expect(food[0].weight).toBe('303g');
-    expect(food[0].calories).toBe(405);
-    expect(food[0].price).toBe(2.85);
-  })));
+  it('should return foods with location Durham', inject(
+    [FidzulaService],
+    fakeAsync((service: FidzulaService) => {
+      let food: Food[] = [];
+      service.getFoodsWithLocation('Durham').subscribe((data) => (food = data));
+      const req = httpTestingController.expectOne(infoUrl + 'food/Durham');
+      // Request is GET
+      expect(req.request.method).toEqual('GET');
+      // Respond with mock data
+      req.flush(mockFoods);
+      // Assert
+      httpTestingController.verify();
+      tick();
+      expect(food).toBeTruthy();
+      expect(food[0].name).toBe('The Original Sandwich');
+      expect(food[0].brand).toBe('Oreo');
+      expect(food[0].weight).toBe('303g');
+      expect(food[0].calories).toBe(405);
+      expect(food[0].price).toBe(2.85);
+    })
+  ));
 
-  it('should return toys with location Durham', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
-    let toys: Toy[] = [];
-    service.getToysWithLocation("Durham").subscribe(data => toys = data);
-    const req = httpTestingController.expectOne(infoUrl + "toys/Durham");
-    // Request is GET
-    expect(req.request.method).toEqual('GET');
-    // Respond with mock data
-    req.flush(mockToys);
-    // Assert
-    httpTestingController.verify();
-    tick();
-    expect(toys).toBeTruthy();
-    expect(toys[0].name).toBe('Medical Kit');
-    expect(toys[0].brand).toBe('Fisher-Price');
-    expect(toys[0].age_group).toBe('3 to 9');
-    expect(toys[0].price).toBe(20.41);
-  })));
+  it('should return toys with location Durham', inject(
+    [FidzulaService],
+    fakeAsync((service: FidzulaService) => {
+      let toys: Toy[] = [];
+      service.getToysWithLocation('Durham').subscribe((data) => (toys = data));
+      const req = httpTestingController.expectOne(infoUrl + 'toys/Durham');
+      // Request is GET
+      expect(req.request.method).toEqual('GET');
+      // Respond with mock data
+      req.flush(mockToys);
+      // Assert
+      httpTestingController.verify();
+      tick();
+      expect(toys).toBeTruthy();
+      expect(toys[0].name).toBe('Medical Kit');
+      expect(toys[0].brand).toBe('Fisher-Price');
+      expect(toys[0].age_group).toBe('3 to 9');
+      expect(toys[0].price).toBe(20.41);
+    })
+  ));
 
-  it('should return books with location Durham', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
-    let books: Book[] = [];
-    service.getBooksWithLocation("Durham").subscribe(data => books = data);
-    const req = httpTestingController.expectOne(mediaUrl + "books/Durham");
-    // Request is GET
-    expect(req.request.method).toEqual('GET');
-    // Respond with mock data
-    req.flush(mockBooks);
-    // Assert
-    httpTestingController.verify();
-    tick();
-    expect(books).toBeTruthy();
-    expect(books[0].title).toBe('Lord of the Rings');
-    expect(books[0].author).toBe('J.R.R Tolkien');
-    expect(books[0].price).toBe(25.99);
-    expect(books[0].isbn).toBe('9780261102385');
-    expect(books[0].publisher).toBe('HarperCollins');
-  })));
+  it('should return books with location Durham', inject(
+    [FidzulaService],
+    fakeAsync((service: FidzulaService) => {
+      let books: Book[] = [];
+      service
+        .getBooksWithLocation('Durham')
+        .subscribe((data) => (books = data));
+      const req = httpTestingController.expectOne(mediaUrl + 'books/Durham');
+      // Request is GET
+      expect(req.request.method).toEqual('GET');
+      // Respond with mock data
+      req.flush(mockBooks);
+      // Assert
+      httpTestingController.verify();
+      tick();
+      expect(books).toBeTruthy();
+      expect(books[0].title).toBe('Lord of the Rings');
+      expect(books[0].author).toBe('J.R.R Tolkien');
+      expect(books[0].price).toBe(25.99);
+      expect(books[0].isbn).toBe('9780261102385');
+      expect(books[0].publisher).toBe('HarperCollins');
+    })
+  ));
 
-  it('should return dvds with location Durham', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
-    let dvds: Dvd[] = [];
-    service.getDvdsWithLocation("Durham").subscribe(data => dvds = data);
-    const req = httpTestingController.expectOne(mediaUrl + "dvds/Durham");
-    // Request is GET
-    expect(req.request.method).toEqual('GET');
-    // Respond with mock data
-    req.flush(mockDvds);
-    // Assert
-    httpTestingController.verify();
-    tick();
-    expect(dvds).toBeTruthy();
-    expect(dvds[0].title).toBe('Avengers - Infinity War');
-    expect(dvds[0].rating).toBe('PG-13');
-    expect(dvds[0].studio).toBe('MARVEL');
-    expect(dvds[0].time).toBe(149);
-    expect(dvds[0].price).toBe(18.55);
-  })));
+  it('should return dvds with location Durham', inject(
+    [FidzulaService],
+    fakeAsync((service: FidzulaService) => {
+      let dvds: Dvd[] = [];
+      service.getDvdsWithLocation('Durham').subscribe((data) => (dvds = data));
+      const req = httpTestingController.expectOne(mediaUrl + 'dvds/Durham');
+      // Request is GET
+      expect(req.request.method).toEqual('GET');
+      // Respond with mock data
+      req.flush(mockDvds);
+      // Assert
+      httpTestingController.verify();
+      tick();
+      expect(dvds).toBeTruthy();
+      expect(dvds[0].title).toBe('Avengers - Infinity War');
+      expect(dvds[0].rating).toBe('PG-13');
+      expect(dvds[0].studio).toBe('MARVEL');
+      expect(dvds[0].time).toBe(149);
+      expect(dvds[0].price).toBe(18.55);
+    })
+  ));
 
-  it('should return laptops with location Durham', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
-    let laptops: Laptop[] = [];
-    service.getLaptopsWithLocation("Durham").subscribe(data => laptops = data);
-    const req = httpTestingController.expectOne(mediaUrl + "laptops/Durham");
-    // Request is GET
-    expect(req.request.method).toEqual('GET');
-    // Respond with mock data
-    req.flush(mockLaptops);
-    // Assert
-    httpTestingController.verify();
-    tick();
-    expect(laptops).toBeTruthy();
-    expect(laptops[0].product).toBe('ThinkPad T430s');
-    expect(laptops[0].brand).toBe('Lenovo');
-    expect(laptops[0].cpu).toBe('core i5-3320');
-    expect(laptops[0].memory).toBe('8GB');
-    expect(laptops[0].price).toBe(325.09);
-  })));
->>>>>>> 808bafe30fbf6e2d4948bd24025ae7711d593079
+  it('should return laptops with location Durham', inject(
+    [FidzulaService],
+    fakeAsync((service: FidzulaService) => {
+      let laptops: Laptop[] = [];
+      service
+        .getLaptopsWithLocation('Durham')
+        .subscribe((data) => (laptops = data));
+      const req = httpTestingController.expectOne(mediaUrl + 'laptops/Durham');
+      // Request is GET
+      expect(req.request.method).toEqual('GET');
+      // Respond with mock data
+      req.flush(mockLaptops);
+      // Assert
+      httpTestingController.verify();
+      tick();
+      expect(laptops).toBeTruthy();
+      expect(laptops[0].product).toBe('ThinkPad T430s');
+      expect(laptops[0].brand).toBe('Lenovo');
+      expect(laptops[0].cpu).toBe('core i5-3320');
+      expect(laptops[0].memory).toBe('8GB');
+      expect(laptops[0].price).toBe(325.09);
+    })
+  ));
 
   it('should return team name for bikes', inject(
     [FidzulaService],
@@ -407,7 +406,25 @@ describe('FidzulaService', () => {
     })
   ));
 
-<<<<<<< HEAD
+  it('should return team name for food', inject(
+    [FidzulaService],
+    fakeAsync((service: FidzulaService) => {
+      let team: Team[] = [];
+      service.getTeam('food').subscribe((data) => (team[0] = data));
+      const req = httpTestingController.expectOne(infoUrl + 'food/team');
+      // Request is GET
+      expect(req.request.method).toEqual('GET');
+      // Respond with mock data
+      req.flush(mockTeams[3]);
+      // Assert
+      httpTestingController.verify();
+      tick();
+      expect(team[0]).toBeTruthy();
+      expect(team[0].name).toBe('food');
+      expect(team[0].memberNames).toEqual(['Dakota', 'Dillon', 'Jon']);
+    })
+  ));
+
   it('should handle a 404 error getBikes', inject(
     [FidzulaService],
     fakeAsync((service: FidzulaService) => {
@@ -439,6 +456,37 @@ describe('FidzulaService', () => {
     })
   ));
 
+  it('should handle a 404 error getFood', inject(
+    [FidzulaService],
+    fakeAsync((service: FidzulaService) => {
+      let errorResp: HttpErrorResponse;
+      let errorReply: string = '';
+      const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
+      service.getFoodsWithLocation('Raleigh').subscribe({
+        next: () => fail('Should not succeed'),
+        error: (e) => (errorReply = e),
+      });
+      const req = httpTestingController.expectOne(infoUrl + 'food/Raleigh');
+      // Assert that the request is a GET.
+      expect(req.request.method).toEqual('GET');
+      // Respond with error
+      req.flush('Forced 404', {
+        status: 404,
+        statusText: 'Not Found',
+      });
+      // Assert that there are no outstanding requests.
+      httpTestingController.verify();
+      // Cause all Observables to complete and check the results
+      tick();
+      expect(errorReply).toBe(
+        'Unable to contact service; please try again later.'
+      );
+      expect(errorHandlerSpy).toHaveBeenCalled();
+      errorResp = errorHandlerSpy.calls.argsFor(0)[0];
+      expect(errorResp.status).toBe(404);
+    })
+  ));
+
   it('should handle network error getBikes', inject(
     [FidzulaService],
     fakeAsync((service: FidzulaService) => {
@@ -450,88 +498,6 @@ describe('FidzulaService', () => {
         error: (e) => (errorReply = e),
       });
       const req = httpTestingController.expectOne(infoUrl + 'bikes/Raleigh');
-=======
-  it('should return team name for food', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
-    let team: Team[] = [];
-    service.getTeam("food").subscribe(data => team[0] = data);
-    const req = httpTestingController.expectOne(infoUrl + "food/team");
-    // Request is GET
-    expect(req.request.method).toEqual('GET');
-    // Respond with mock data
-    req.flush(mockTeams[3]);
-    // Assert
-    httpTestingController.verify();
-    tick();
-    expect(team[0]).toBeTruthy();
-    expect(team[0].name).toBe('food');
-    expect(team[0].memberNames).toEqual([  'Dakota', 'Dillon', 'Jon' ]);
-  })));
-
-  it('should handle a 404 error getBikes', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
-    let errorResp: HttpErrorResponse;
-    let errorReply: string = "";
-    const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-    service.getBikesWithLocation("Raleigh")
-        .subscribe({
-            next: () => fail('Should not succeed'),
-            error: (e) => errorReply = e
-        });
-    const req = httpTestingController.expectOne(infoUrl + "bikes/Raleigh");
-    // Assert that the request is a GET.
-    expect(req.request.method).toEqual('GET');
-    // Respond with error
-    req.flush('Forced 404', {
-        status: 404,
-        statusText: 'Not Found'
-    });
-    // Assert that there are no outstanding requests.
-    httpTestingController.verify();
-    // Cause all Observables to complete and check the results
-    tick();
-    expect(errorReply).toBe('Unable to contact service; please try again later.');
-    expect(errorHandlerSpy).toHaveBeenCalled();
-    errorResp = errorHandlerSpy.calls.argsFor(0)[0];
-    expect(errorResp.status).toBe(404);
-  })));
-
-  it('should handle a 404 error getFood', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
-    let errorResp: HttpErrorResponse;
-    let errorReply: string = "";
-    const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-    service.getFoodsWithLocation("Raleigh")
-        .subscribe({
-            next: () => fail('Should not succeed'),
-            error: (e) => errorReply = e
-        });
-    const req = httpTestingController.expectOne(infoUrl + "food/Raleigh");
-    // Assert that the request is a GET.
-    expect(req.request.method).toEqual('GET');
-    // Respond with error
-    req.flush('Forced 404', {
-        status: 404,
-        statusText: 'Not Found'
-    });
-    // Assert that there are no outstanding requests.
-    httpTestingController.verify();
-    // Cause all Observables to complete and check the results
-    tick();
-    expect(errorReply).toBe('Unable to contact service; please try again later.');
-    expect(errorHandlerSpy).toHaveBeenCalled();
-    errorResp = errorHandlerSpy.calls.argsFor(0)[0];
-    expect(errorResp.status).toBe(404);
-  })));
-
-  it('should handle network error getBikes', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
-      let errorResp: HttpErrorResponse;
-      let errorReply: string = "";
-      const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-      service.getBikesWithLocation("Raleigh")
-          .subscribe({
-              next: () => fail('Should not succeed'),
-              error: (e) => errorReply = e
-          });
-      const req = httpTestingController.expectOne(infoUrl + "bikes/Raleigh");
->>>>>>> 808bafe30fbf6e2d4948bd24025ae7711d593079
       // Assert that the request is a GET.
       expect(req.request.method).toEqual('GET');
       // Create mock ErrorEvent, raised when something goes wrong at the network level.
@@ -544,7 +510,6 @@ describe('FidzulaService', () => {
       httpTestingController.verify();
       // Cause all Observables to complete and check the results
       tick();
-<<<<<<< HEAD
       expect(errorReply).toBe(
         'Unable to contact service; please try again later.'
       );
@@ -553,39 +518,36 @@ describe('FidzulaService', () => {
       expect(errorResp.error.type).toBe('simulated network error');
     })
   ));
-=======
-      expect(errorReply).toBe('Unable to contact service; please try again later.');
+
+  it('should handle network error getFood', inject(
+    [FidzulaService],
+    fakeAsync((service: FidzulaService) => {
+      let errorResp: HttpErrorResponse;
+      let errorReply: string = '';
+      const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
+      service.getFoodsWithLocation('Raleigh').subscribe({
+        next: () => fail('Should not succeed'),
+        error: (e) => (errorReply = e),
+      });
+      const req = httpTestingController.expectOne(infoUrl + 'food/Raleigh');
+      // Assert that the request is a GET.
+      expect(req.request.method).toEqual('GET');
+      // Create mock ErrorEvent, raised when something goes wrong at the network level.
+      // Connection timeout, DNS error, offline, etc
+      const mockError = new ProgressEvent('simulated network error');
+      // Respond with mock error
+      req.error(mockError);
+      // Respond with error
+      // Assert that there are no outstanding requests.
+      httpTestingController.verify();
+      // Cause all Observables to complete and check the results
+      tick();
+      expect(errorReply).toBe(
+        'Unable to contact service; please try again later.'
+      );
       expect(errorHandlerSpy).toHaveBeenCalled();
       errorResp = errorHandlerSpy.calls.argsFor(0)[0];
       expect(errorResp.error.type).toBe('simulated network error');
-  })));
-
-  it('should handle network error getFood', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
-    let errorResp: HttpErrorResponse;
-    let errorReply: string = "";
-    const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-    service.getFoodsWithLocation("Raleigh")
-        .subscribe({
-            next: () => fail('Should not succeed'),
-            error: (e) => errorReply = e
-        });
-    const req = httpTestingController.expectOne(infoUrl + "food/Raleigh");
-    // Assert that the request is a GET.
-    expect(req.request.method).toEqual('GET');
-    // Create mock ErrorEvent, raised when something goes wrong at the network level.
-    // Connection timeout, DNS error, offline, etc
-    const mockError = new ProgressEvent('simulated network error');
-    // Respond with mock error
-    req.error(mockError);
-    // Respond with error
-    // Assert that there are no outstanding requests.
-    httpTestingController.verify();
-    // Cause all Observables to complete and check the results
-    tick();
-    expect(errorReply).toBe('Unable to contact service; please try again later.');
-    expect(errorHandlerSpy).toHaveBeenCalled();
-    errorResp = errorHandlerSpy.calls.argsFor(0)[0];
-    expect(errorResp.error.type).toBe('simulated network error');
-  })));
->>>>>>> 808bafe30fbf6e2d4948bd24025ae7711d593079
+    })
+  ));
 });

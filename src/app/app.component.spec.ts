@@ -1,7 +1,14 @@
+import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { AppComponent } from './app.component';
 import { FidzulaService } from './service/fidzula.service';
+
+@Component({
+  selector: 'app-table',
+  template: '<table></table>',
+})
+class MockTableComponent {}
 
 describe('AppComponent', () => {
   let spy: any = jasmine.createSpyObj('FidzulaService', [
@@ -23,7 +30,7 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AppComponent],
+      declarations: [AppComponent, MockTableComponent],
       providers: [{ provide: FidzulaService, useValue: spy }],
     }).compileComponents();
   });
@@ -49,5 +56,10 @@ describe('AppComponent', () => {
     );
   });
 
-  // TODO: test table rendering with mock component
+  it('should render table', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('table')).toBeTruthy();
+  });
 });
