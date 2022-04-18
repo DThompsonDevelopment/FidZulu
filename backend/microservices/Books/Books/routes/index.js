@@ -36,38 +36,24 @@ router.get('/books/all', (request, response, next) => { //this works
 });
 
 router.get('/books/all/Raleigh', (request, response, next) => {
-  let get_params = url.parse(request.url, true).query;
   console.log('got into books');
-  if (Object.keys(get_params).length == 0) {
-    console.log('no params');
+  let result = books.get_raleigh();
+  if (result) {
     response.setHeader('content-type', 'application/json');
-    response.end(JSON.stringify(books.list()));
+    response.end(JSON.stringify(result));
   } else {
-    let result = books.get_raleigh();
-    if (result) {
-      response.setHeader('content-type', 'application/json');
-      response.end(JSON.stringify(result));
-    } else {
-      next(createError(404));
-    }
+    next(createError(404));
   }
 });
 
 router.get('/books/all/Durham', (request, response, next) => {
-  let get_params = url.parse(request.url, true).query;
   console.log('got into books');
-  if (Object.keys(get_params).length == 0) {
-    console.log('no params');
+  let result = books.get_durham();
+  if (result) {
     response.setHeader('content-type', 'application/json');
-    response.end(JSON.stringify(books.list()));
+    response.end(JSON.stringify(result));
   } else {
-    let result = books.get_durham();
-    if (result) {
-      response.setHeader('content-type', 'application/json');
-      response.end(JSON.stringify(result));
-    } else {
-      next(createError(404));
-    }
+    next(createError(404));
   }
 });
 

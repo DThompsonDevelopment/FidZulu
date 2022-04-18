@@ -11,20 +11,18 @@ exports.list = function() {
 exports.get_raleigh = function() {
     let json_result = JSON.parse(read_json_file());
     for (let i = 0; i < json_result.length; i ++){
-        json_result[i].price = json_result[i].price * .925; //this doesn't work
-        return json_result[i];
+        let newPrice = json_result[i].price * .925;
+        json_result[i].price = Math.round(newPrice * 100) / 100;
     }
-    return null;
+    return json_result;
 }
 
-// exports.get_durham = function() {
-//     let json_result = JSON.parse(read_json_file());
-//     let result = json_result.result;
-//     for (let i = 0; i < result.length; i ++){
-//         let currBook = result[i]
-//         currBook.price = currBook.price * .92; //this doesn't work
-//         return currBook;
-//     }
-//     return null;
-// }
+exports.get_durham = function() {
+    let json_result = JSON.parse(read_json_file());
+    for (let i = 0; i < json_result.length; i ++){
+        let newPrice = json_result[i].price * .92;
+        json_result[i].price = Math.round(newPrice * 100) / 100;
+    }
+    return json_result;
+}
 
