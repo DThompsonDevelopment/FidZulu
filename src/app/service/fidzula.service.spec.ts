@@ -252,29 +252,6 @@ describe('FidzulaService', () => {
     })
   ));
 
-<<<<<<< HEAD
-  it('should return bikes with location Durham', inject(
-    [FidzulaService],
-    fakeAsync((service: FidzulaService) => {
-      let bikes: Bike[] = [];
-      service
-        .getBikesWithLocation('Durham')
-        .subscribe((data) => (bikes = data));
-      const req = httpTestingController.expectOne(infoUrl + 'bikes/Durham');
-      // Request is GET
-      expect(req.request.method).toEqual('GET');
-      // Respond with mock data
-      req.flush(mockBikes);
-      // Assert
-      httpTestingController.verify();
-      tick();
-      expect(bikes).toBeTruthy();
-      expect(bikes[0].brand).toBe('Mamba Bikes');
-      expect(bikes[0].color).toBe('black');
-      //expect(bikes[0].price).toBe(81.95);//75.88 + 8%
-    })
-  ));
-=======
   it('should return bikes with location Durham', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let bikes: Bike[] = [];
     service.getBikesWithLocation("Durham").subscribe(data => bikes = data);
@@ -386,7 +363,6 @@ describe('FidzulaService', () => {
     expect(laptops[0].memory).toBe('8GB');
     expect(laptops[0].price).toBe(325.09);
   })));
->>>>>>> 808bafe30fbf6e2d4948bd24025ae7711d593079
 
   it('should return team name for bikes', inject(
     [FidzulaService],
@@ -407,50 +383,6 @@ describe('FidzulaService', () => {
     })
   ));
 
-<<<<<<< HEAD
-  it('should handle a 404 error getBikes', inject(
-    [FidzulaService],
-    fakeAsync((service: FidzulaService) => {
-      let errorResp: HttpErrorResponse;
-      let errorReply: string = '';
-      const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-      service.getBikesWithLocation('Raleigh').subscribe({
-        next: () => fail('Should not succeed'),
-        error: (e) => (errorReply = e),
-      });
-      const req = httpTestingController.expectOne(infoUrl + 'bikes/Raleigh');
-      // Assert that the request is a GET.
-      expect(req.request.method).toEqual('GET');
-      // Respond with error
-      req.flush('Forced 404', {
-        status: 404,
-        statusText: 'Not Found',
-      });
-      // Assert that there are no outstanding requests.
-      httpTestingController.verify();
-      // Cause all Observables to complete and check the results
-      tick();
-      expect(errorReply).toBe(
-        'Unable to contact service; please try again later.'
-      );
-      expect(errorHandlerSpy).toHaveBeenCalled();
-      errorResp = errorHandlerSpy.calls.argsFor(0)[0];
-      expect(errorResp.status).toBe(404);
-    })
-  ));
-
-  it('should handle network error getBikes', inject(
-    [FidzulaService],
-    fakeAsync((service: FidzulaService) => {
-      let errorResp: HttpErrorResponse;
-      let errorReply: string = '';
-      const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-      service.getBikesWithLocation('Raleigh').subscribe({
-        next: () => fail('Should not succeed'),
-        error: (e) => (errorReply = e),
-      });
-      const req = httpTestingController.expectOne(infoUrl + 'bikes/Raleigh');
-=======
   it('should return team name for food', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let team: Team[] = [];
     service.getTeam("food").subscribe(data => team[0] = data);
@@ -531,7 +463,6 @@ describe('FidzulaService', () => {
               error: (e) => errorReply = e
           });
       const req = httpTestingController.expectOne(infoUrl + "bikes/Raleigh");
->>>>>>> 808bafe30fbf6e2d4948bd24025ae7711d593079
       // Assert that the request is a GET.
       expect(req.request.method).toEqual('GET');
       // Create mock ErrorEvent, raised when something goes wrong at the network level.
@@ -544,16 +475,6 @@ describe('FidzulaService', () => {
       httpTestingController.verify();
       // Cause all Observables to complete and check the results
       tick();
-<<<<<<< HEAD
-      expect(errorReply).toBe(
-        'Unable to contact service; please try again later.'
-      );
-      expect(errorHandlerSpy).toHaveBeenCalled();
-      errorResp = errorHandlerSpy.calls.argsFor(0)[0];
-      expect(errorResp.error.type).toBe('simulated network error');
-    })
-  ));
-=======
       expect(errorReply).toBe('Unable to contact service; please try again later.');
       expect(errorHandlerSpy).toHaveBeenCalled();
       errorResp = errorHandlerSpy.calls.argsFor(0)[0];
@@ -587,5 +508,4 @@ describe('FidzulaService', () => {
     errorResp = errorHandlerSpy.calls.argsFor(0)[0];
     expect(errorResp.error.type).toBe('simulated network error');
   })));
->>>>>>> 808bafe30fbf6e2d4948bd24025ae7711d593079
 });
