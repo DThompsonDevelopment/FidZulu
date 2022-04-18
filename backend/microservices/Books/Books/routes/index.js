@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 // can process any existing query parameters 
 //(e.g.:?firstname=John)
-router.get('/books', (request, response, next) => {
+router.get('/books/all', (request, response, next) => {
   let get_params = url.parse(request.url, true).query;
   console.log('got into books');
   if (Object.keys(get_params).length == 0) {
