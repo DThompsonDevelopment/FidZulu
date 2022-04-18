@@ -27,15 +27,19 @@ router.get('/food/all/:location', (req, res) => {
   let tax = 0;
   if(/\b[Dd][Uu][Rr][Hh][Aa][Mm]\b/g.test(loc.location)){//Durham location
     tax = 0.075; //7.5% Tax
-    console.log("durham inside")
   } else if(/\b[Rr][Aa][Ll][Ee][Ii][Gg][Hh]\b/g.test(loc.location)){//Raleigh location
     tax = 0.08; //8% Tax
-    console.log("raleigh inside")
   } else {
     //Throw error
     console.log("else")
   }
-  
+
+  let data = readFoodDataSync();
+  for(let jsonObj of data){
+    let price = jsonObj.price + (jsonObj.price * tax);
+    jsonObj.price = price.toFixed(2);
+  }
+  res.json(data);  
 })
 
 //router.post();
