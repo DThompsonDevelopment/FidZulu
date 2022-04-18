@@ -9,8 +9,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/toys/all/:location', (request, response, next) => {
-  const param = request.params.location;
+router.get('/toys/all/:location', (req, res, next) => {
+  const param = req.params.location;
   console.log('got into toys/all/:location ' + param);
 
   const result = location.query_by_arg(
@@ -32,13 +32,13 @@ router.get('/toys/all/:location', (request, response, next) => {
     res.send(result);
   } else {
     //next(createError(404));
-    //next(createError(204));
+    next(createError(404));
     console.log("fail");
   }
 });
 
 router.get('/toys/team', function(req, res) {
-  let team = '{"team" : "Toys", "membersNames":["Zach Schulman", "Thaddeus Tutka"]}';
+  let team = '[{"team" : "Toys", "membersNames":["Zach Schulman", "Thaddeus Tutka"]}]';
   const obj = JSON.parse(team);
   res.send(obj);
 });
