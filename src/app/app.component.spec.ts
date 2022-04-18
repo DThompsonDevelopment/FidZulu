@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { AppComponent } from './app.component';
+import { Team } from './models/teams';
 import { FidzulaService } from './service/fidzula.service';
 
 @Component({
@@ -9,6 +10,12 @@ import { FidzulaService } from './service/fidzula.service';
   template: '<table></table>',
 })
 class MockTableComponent {}
+
+@Component({
+  selector: 'app-team',
+  template: '<ul></ul>',
+})
+class MockTeamComponent {}
 
 describe('AppComponent', () => {
   let spy: any = jasmine.createSpyObj('FidzulaService', [
@@ -30,7 +37,7 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AppComponent, MockTableComponent],
+      declarations: [AppComponent, MockTableComponent, MockTeamComponent],
       providers: [{ provide: FidzulaService, useValue: spy }],
     }).compileComponents();
   });
@@ -61,5 +68,14 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('table')).toBeTruthy();
+  });
+
+  it('should render team', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    app.team = new Team('frontend', ['Chris', 'Shiv', 'Yahia']);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('ul')).toBeTruthy();
   });
 });
