@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FidzulaService } from './service/fidzula.service';
 import { Item, Items } from './types/item';
 
