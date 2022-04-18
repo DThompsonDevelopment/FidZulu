@@ -37,24 +37,34 @@ router.get('/books/all', (request, response, next) => { //this works
 
 router.get('/books/all/Raleigh', (request, response, next) => {
   console.log('got into books');
-  let result = books.get_raleigh();
-  if (result) {
-    response.setHeader('content-type', 'application/json');
-    response.end(JSON.stringify(result));
-  } else {
-    next(createError(404));
+  try {
+    let result = books.get_raleigh();
+    if (result) {
+      response.setHeader('content-type', 'application/json');
+      response.end(JSON.stringify(result));
+    } else {
+      next(createError(404));
+    }
+  } catch (err) {
+    next(createError(500));
   }
+  
 });
 
 router.get('/books/all/Durham', (request, response, next) => {
   console.log('got into books');
-  let result = books.get_durham();
-  if (result) {
-    response.setHeader('content-type', 'application/json');
-    response.end(JSON.stringify(result));
-  } else {
-    next(createError(404));
+  try {
+    let result = books.get_durham();
+    if (result) {
+      response.setHeader('content-type', 'application/json');
+      response.end(JSON.stringify(result));
+    } else {
+      next(createError(404));
+    }
+  } catch (err) {
+    nextends(createError(500));
   }
+  
 });
 
 
