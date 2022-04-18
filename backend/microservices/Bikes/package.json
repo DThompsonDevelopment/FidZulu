@@ -1,0 +1,19 @@
+{
+  "name": "bikes",
+  "version": "1.0.0",
+  "description": "Bike Service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DThompsonDevelopment/FidZulu.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DThompsonDevelopment/FidZulu/issues"
+  },
+  "homepage": "https://github.com/DThompsonDevelopment/FidZulu#readme"
+}
