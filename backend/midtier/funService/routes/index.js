@@ -11,3 +11,4 @@ res.end(JSON.stringify(team));
 });
 
 module.exports = router;
+console.log("listnening on port 3021");
