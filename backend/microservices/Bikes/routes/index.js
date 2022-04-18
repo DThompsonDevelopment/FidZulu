@@ -35,4 +35,17 @@ router.get("/bikes/all/:location", function (req, res, next) {
   }
 });
 
+/* GET home page. */
+router.get("/bikes/team", function (req, res, next) {
+    let returnJson = {
+      team: "bikes",
+       memberNames: ["Joseph Buono", "Jimmy Lin"]
+    };
+
+    console.log("got into /bikes/team");
+
+    res.send(returnJson);
+  
+});
+
 module.exports = router;
