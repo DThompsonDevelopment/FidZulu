@@ -1,12 +1,14 @@
-import { Component, Input } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { Items } from './types/item';
+import { FidzulaService } from './service/fidzula.service';
+
+class MockFidzuluService {}
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AppComponent],
+      providers: [{ provide: FidzulaService, useValue: MockFidzuluService }],
     }).compileComponents();
   });
 
