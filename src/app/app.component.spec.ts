@@ -1,14 +1,30 @@
 import { TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 import { AppComponent } from './app.component';
 import { FidzulaService } from './service/fidzula.service';
 
-class MockFidzuluService {}
-
 describe('AppComponent', () => {
+  let spy: any = jasmine.createSpyObj('FidzulaService', [
+    'getTeam',
+    'getBooksWithLocation',
+    'getBikesWithLocation',
+    'getDvdsWithLocation',
+    'getFoodsWithLocation',
+    'getLaptopsWithLocation',
+    'getToysWithLocation',
+  ]);
+  spy.getTeam.and.returnValue(of({}));
+  spy.getBikesWithLocation.and.returnValue(of({}));
+  spy.getBooksWithLocation.and.returnValue(of({}));
+  spy.getDvdsWithLocation.and.returnValue(of({}));
+  spy.getFoodsWithLocation.and.returnValue(of({}));
+  spy.getLaptopsWithLocation.and.returnValue(of({}));
+  spy.getToysWithLocation.and.returnValue(of({}));
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AppComponent],
-      providers: [{ provide: FidzulaService, useValue: MockFidzuluService }],
+      providers: [{ provide: FidzulaService, useValue: spy }],
     }).compileComponents();
   });
 

@@ -9,8 +9,9 @@ import { Item, Items } from './types/item';
 })
 export class AppComponent implements OnInit {
   title = 'FidZulu';
-  items: Items = [{ name: 'boi' }];
+  items: Items = [];
   category = 'bikes';
+  location = 'Raleigh';
   team: Item | undefined;
 
   constructor(private service: FidzulaService) {}
@@ -19,37 +20,55 @@ export class AppComponent implements OnInit {
     this.fetchData();
   }
 
-  onChange(newValue: string) {
+  onChangeCategory(newValue: string) {
     if (this.category === newValue) return;
     this.category = newValue;
     this.fetchData();
   }
 
+  onChangeLocation(newValue: string) {
+    if (this.location === newValue) return;
+    this.location = newValue;
+    this.fetchData();
+  }
+
   private fetchData() {
-    // TODO: call functions and fetch team
+    this.service.getTeam(this.category).subscribe((data) => (this.team = data));
     switch (this.category) {
       case 'bikes':
-        this.items = [{ bike: 'ya' }];
+        this.service
+          .getBikesWithLocation(this.location)
+          .subscribe((data) => (this.items = data));
         break;
 
       case 'books':
-        this.items = [{ books: 'nah' }];
+        this.service
+          .getBooksWithLocation(this.location)
+          .subscribe((data) => (this.items = data));
         break;
 
       case 'dvds':
-        this.items = [{ dvd: 'title' }];
+        this.service
+          .getDvdsWithLocation(this.location)
+          .subscribe((data) => (this.items = data));
         break;
 
       case 'food':
-        this.items = [];
+        this.service
+          .getFoodsWithLocation(this.location)
+          .subscribe((data) => (this.items = data));
         break;
 
       case 'laptops':
-        this.items = [];
+        this.service
+          .getLaptopsWithLocation(this.location)
+          .subscribe((data) => (this.items = data));
         break;
 
       case 'toys':
-        this.items = [];
+        this.service
+          .getToysWithLocation(this.location)
+          .subscribe((data) => (this.items = data));
         break;
 
       default:
