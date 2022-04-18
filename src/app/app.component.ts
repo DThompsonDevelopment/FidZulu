@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Team } from './models/teams';
 import { FidzulaService } from './service/fidzula.service';
 import { Item, Items } from './types/item';
 
@@ -12,7 +13,7 @@ export class AppComponent implements OnInit {
   items: Items = [];
   category = 'bikes';
   location = 'Raleigh';
-  team: Item | undefined;
+  team: Team | undefined;
 
   constructor(private service: FidzulaService) {}
 
