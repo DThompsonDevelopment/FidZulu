@@ -59,12 +59,6 @@ const alteredBikes = [
 
 describe("Testing HTTP Endpoints", () => {
   describe("Testing /bikes/all/:location", () => {
-    /* it("returns status code 200", (done) => {
-    request.get(base_url, (error, response, body) => {
-    expect(response.statusCode).toBe(200);
-    done();
-    });
-    }); */
 
     it("testing Durham location", (done) => {
       let bike = {
