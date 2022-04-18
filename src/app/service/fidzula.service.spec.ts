@@ -264,7 +264,7 @@ describe('FidzulaService', () => {
 
   it('should return team name for bikes', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let team: Team[] = [];
-    service.getBikesWithTeam().subscribe(data => team[0] = data);
+    service.getTeam("bike").subscribe(data => team[0] = data);
     const req = httpTestingController.expectOne(infoUrl + "bikes/team");
     // Request is GET
     expect(req.request.method).toEqual('GET');
