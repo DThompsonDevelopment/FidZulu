@@ -21,6 +21,23 @@ describe("Unit tests on Dvds module", () => {
         });
     });
 
-    
+    describe("load alldvds with location tax", () => {
+        //positive test to load all dvds
+        const locationparam = 'durham'
+        it("have four elements", () => {
+            let results = dvds.query_with_salesTax(locationparam);
+            expect(results.length).toBe(4);
+        });
+        
+        it("has correct  elements property--price", () => {
+            let results = dvds.query_with_salesTax(locationparam);
+            expect(results[0].title).toBe("Avengers - Infinity War");
+            expect(results[0].price).toBe(20.03);
+            expect(results[1].title).toBe("Spider-Man Homecoming");
+            expect(results[1].price).toBe(7.81);
+            
+        });
+    });
+
     
 });
