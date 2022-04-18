@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
+const fs = require('fs');
 const location = require('../modules/location');
 const createError = require('http-errors');
 const url = require('url');
+let db = require('../data/toys.json');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -41,6 +43,14 @@ router.get('/toys/team', function(req, res) {
   let team = '[{"team" : "Toys", "membersNames":["Zach Schulman", "Thaddeus Tutka"]}]';
   const obj = JSON.parse(team);
   res.send(obj);
+});
+
+router.post('/toys/add', function(req, res) {
+  let obj = req.body;
+  res.status(201).send('made a new toy!');
+  db.push(obj);
+  console.log(db);
+  fs.writeFileSync('../data/toys.json', JSON.stringify(db, null, 4));
 });
 
 module.exports = router;
