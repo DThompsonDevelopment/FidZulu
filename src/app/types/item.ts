@@ -1,4 +1,4 @@
-export type Value = string | number;
+export type Value = string | number | Value[];
 export interface Item {
   [key: string]: Value;
 }
