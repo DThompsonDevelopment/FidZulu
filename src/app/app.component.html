@@ -3,7 +3,7 @@
 </header>
 <main>
   <section>
-    <select [ngModel]="category" (ngModelChange)="onChangeCategory($event)">
+    <select class="services" [ngModel]="category" (ngModelChange)="onChangeCategory($event)">
       <option [ngValue]="'bikes'">Bikes</option>
       <option [ngValue]="'books'">Books</option>
       <option [ngValue]="'dvds'">DVDs</option>
@@ -12,7 +12,7 @@
       <option [ngValue]="'toys'">Toys</option>
     </select>
 
-    <select [ngModel]="location" (ngModelChange)="onChangeLocation($event)">
+    <select class="locations" [ngModel]="location" (ngModelChange)="onChangeLocation($event)">
       <option [ngValue]="'Raleigh'">Raleigh</option>
       <option [ngValue]="'Durham'">Durham</option>
     </select>
