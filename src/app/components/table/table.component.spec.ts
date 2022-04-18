@@ -63,4 +63,11 @@ describe('TableComponent', () => {
       );
     }
   });
+
+  it('should not render table when data is empty', () => {
+    component.items = [];
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('table')).toBeFalsy();
+  });
 });
