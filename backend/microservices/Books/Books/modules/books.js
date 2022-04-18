@@ -11,7 +11,7 @@ exports.list = function() {
 exports.get_raleigh = function() {
     let json_result = JSON.parse(read_json_file());
     for (let i = 0; i < json_result.length; i ++){
-        let newPrice = json_result[i].price * .925;
+        let newPrice = json_result[i].price * 1.075;
         json_result[i].price = Math.round(newPrice * 100) / 100;
     }
     return json_result;
@@ -20,7 +20,7 @@ exports.get_raleigh = function() {
 exports.get_durham = function() {
     let json_result = JSON.parse(read_json_file());
     for (let i = 0; i < json_result.length; i ++){
-        let newPrice = json_result[i].price * .92;
+        let newPrice = json_result[i].price * 1.08;
         json_result[i].price = Math.round(newPrice * 100) / 100;
     }
     return json_result;
