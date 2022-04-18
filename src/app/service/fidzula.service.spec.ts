@@ -245,6 +245,25 @@ describe('FidzulaService', () => {
    // expect(bikes[0].price).toBe(81.57);//75.88 + 7.5%
   })));
 
+  it('should return food with location Durham', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+    let food: Food[] = [];
+    service.getFoodsWithLocation("Durham").subscribe(data => food = data);
+    const req = httpTestingController.expectOne(infoUrl + "food/Durham");
+    // Request is GET
+    expect(req.request.method).toEqual('GET');
+    // Respond with mock data
+    req.flush(mockFoods);
+    // Assert
+    httpTestingController.verify();
+    tick();
+    expect(food).toBeTruthy();
+    expect(food[0].name).toBe('The Original Sandwich');
+    expect(food[0].brand).toBe('Oreo');
+    expect(food[0].weight).toBe('303g');
+    expect(food[0].calories).toBe(405);
+    expect(food[0].price).toBe(2.85);
+  })));
+
   it('should return bikes with location Durham', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let bikes: Bike[] = [];
     service.getBikesWithLocation("Durham").subscribe(data => bikes = data);
