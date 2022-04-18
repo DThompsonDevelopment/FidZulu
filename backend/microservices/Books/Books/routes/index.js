@@ -35,4 +35,11 @@ router.get('/books/all', (request, response, next) => {
   }
 });
 
+router.get('/book-team', function(req, res) {
+  res.json({
+    "team": "Book Team",
+    "membersNames": ["Swapnil Kha", "Eric Vo"]
+  });
+});
+
 module.exports = router;
