@@ -30,7 +30,7 @@ router.get("/dvds/all/:location", (req,res,next) => {
       }
 
 })
-   router.get('/dvd/team', (request, response, next) => {
+   router.get('/dvds/team', (request, response, next) => {
     if (Object.keys(dvdteam).length ==0 ){
         next(createError(204));
     }else{

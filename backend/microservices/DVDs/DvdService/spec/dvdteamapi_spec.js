@@ -1,7 +1,7 @@
 const request = require("request");
 const base_url = 'http://localhost:3035/';
 
-describe("GET /dvd/team", () => {
+describe("GET /dvds/team", () => {
     it("returns correct status code", (done) => {
         request.get(base_url, (error, response, body) => {
             expect(response.statusCode).toBe(200);

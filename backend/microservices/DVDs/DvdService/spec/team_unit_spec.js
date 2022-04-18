@@ -10,7 +10,7 @@ describe("Unit tests on dvd team module", () => {
         });
         it("has correct  elements property", () => {
             let results = dvdteam.list();
-            expect(results[0].team).toBe("dvd");
+            expect(results[0].team).toBe("dvds");
             expect(results[0].members).toContain("Pawan Raj Adhikari");
             expect(results[0].members).toContain("Bigyan Adhikari");
            
