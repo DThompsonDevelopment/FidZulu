@@ -18,8 +18,8 @@ describe("GET /food/all/Raleigh", () => {
                 expect(body).toBeTruthy();
                 expect(body).toContain("3.08");
                 expect(body).toContain("10.14");
-                expect(body).toContain("2.63");
-                expect(body).toContain("6.31");
+                expect(body).toContain("2.65");
+                expect(body).toContain("6.34");
                 done();
         });
     });
@@ -36,10 +36,10 @@ describe("GET /food/all/Durham", () => {
         request.get(base_url + "food/all/Durham", 
             (error, response, body) => {
                 expect(body).toBeTruthy();
-                expect(body).toContain("3.06");
+                expect(body).toContain('3.06');
                 expect(body).toContain("10.09");
-                expect(body).toContain("2.65");
-                expect(body).toContain("6.34");
+                expect(body).toContain("2.63");
+                expect(body).toContain("6.31");
                 done();
         });
     });
