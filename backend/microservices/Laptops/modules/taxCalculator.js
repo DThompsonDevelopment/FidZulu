@@ -12,6 +12,7 @@ exports.list = () => {
 exports.calculateTax = (location) => {
     let result = JSON.parse(read_json_file());
 
+
     for (let i = 0; i < result.length; i++){
         if(location === "Raleigh"){
             result[i].price *= 1.075;
@@ -20,7 +21,8 @@ exports.calculateTax = (location) => {
             result[i].price *= 1.08;
         }
         else {
-            throw new Error("Unknow location " + location);
+           // throw new Error("Unknown location " + location);
+           return null;
         }
     }
     return result;
