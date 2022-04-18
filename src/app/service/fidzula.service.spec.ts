@@ -190,20 +190,28 @@ const mockLaptops:Laptop[] = [
 
 const mockTeams:Team[] =[
   {
-  "name": "bikes",
-  "memberNames": ["Chris", "Yahia", "Shiv"]
+    "name": "food",
+    "memberNames": ["Dakota", "Dillon", "Jon"]
   },
   {
-  "name": "midTierService1",
-  "memberNames": ["Mike", "Peter", "Vahe"]
+    "name": "bikes",
+    "memberNames": ["Jimmy", "Joseph"]
   },
   {
-  "name": "midTierService2",
-  "memberNames": ["Dev", "Pranav", "Ty"]
+    "name": "toys",
+    "memberNames": ["Zack", "Thaddeus"]
   },
   {
-  "name": "food",
-  "memberNames": ["Dakota", "Dillon", "Jon"]
+    "name": "books",
+    "memberNames": ["Eric", "Swapnil"]
+  },
+  {
+    "name": "dvds",
+    "memberNames": ["Bigyan", "Pawan"]
+  },
+  {
+    "name": "laptops",
+    "memberNames": ["Barry", "Nayaab"]
   }
 ]
 
@@ -238,9 +246,10 @@ describe('FidzulaService', () => {
     httpTestingController.verify();
     tick();
     expect(bikes).toBeTruthy();
+    expect(bikes[0].name).toBe("Mamba Sport 12\" Balance Bike");
     expect(bikes[0].brand).toBe('Mamba Bikes');
     expect(bikes[0].color).toBe('black');
-   // expect(bikes[0].price).toBe(81.57);//75.88 + 7.5%
+    expect(bikes[0].price).toBe(75.88);
   })));
 
   it('should return bikes with location Durham', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
@@ -356,10 +365,10 @@ describe('FidzulaService', () => {
   })));
 
   //team
-  it('should return team name for bikes', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+  it('should return team name for food', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let team: Team[] = [];
-    service.getTeam("bikes").subscribe(data => team[0] = data);
-    const req = httpTestingController.expectOne(infoUrl + "bikes/team");
+    service.getTeam("food").subscribe(data => team[0] = data);
+    const req = httpTestingController.expectOne(infoUrl + "food/team");
     // Request is GET
     expect(req.request.method).toEqual('GET');
     // Respond with mock data
@@ -368,14 +377,46 @@ describe('FidzulaService', () => {
     httpTestingController.verify();
     tick();
     expect(team[0]).toBeTruthy();
-    expect(team[0].name).toBe('bikes');
-    expect(team[0].memberNames).toEqual([  'Chris', 'Yahia', 'Shiv' ]);
+    expect(team[0].name).toBe('food');
+    expect(team[0].memberNames).toEqual([  'Dakota', 'Dillon', 'Jon' ]);
   })));
 
-  it('should return team name for food', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+  it('should return team name for bikes', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let team: Team[] = [];
-    service.getTeam("food").subscribe(data => team[0] = data);
-    const req = httpTestingController.expectOne(infoUrl + "food/team");
+    service.getTeam("bikes").subscribe(data => team[0] = data);
+    const req = httpTestingController.expectOne(infoUrl + "bikes/team");
+    // Request is GET
+    expect(req.request.method).toEqual('GET');
+    // Respond with mock data
+    req.flush(mockTeams[1]);
+    // Assert
+    httpTestingController.verify();
+    tick();
+    expect(team[0]).toBeTruthy();
+    expect(team[0].name).toBe('bikes');
+    expect(team[0].memberNames).toEqual(["Jimmy", "Joseph"]);
+  })));
+
+  it('should return team name for toys', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+    let team: Team[] = [];
+    service.getTeam("toys").subscribe(data => team[0] = data);
+    const req = httpTestingController.expectOne(infoUrl + "toys/team");
+    // Request is GET
+    expect(req.request.method).toEqual('GET');
+    // Respond with mock data
+    req.flush(mockTeams[2]);
+    // Assert
+    httpTestingController.verify();
+    tick();
+    expect(team[0]).toBeTruthy();
+    expect(team[0].name).toBe('toys');
+    expect(team[0].memberNames).toEqual(["Zack", "Thaddeus"]);
+  })));
+
+  it('should return team name for books', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+    let team: Team[] = [];
+    service.getTeam("books").subscribe(data => team[0] = data);
+    const req = httpTestingController.expectOne(mediaUrl + "books/team");
     // Request is GET
     expect(req.request.method).toEqual('GET');
     // Respond with mock data
@@ -384,8 +425,150 @@ describe('FidzulaService', () => {
     httpTestingController.verify();
     tick();
     expect(team[0]).toBeTruthy();
-    expect(team[0].name).toBe('food');
-    expect(team[0].memberNames).toEqual([  'Dakota', 'Dillon', 'Jon' ]);
+    expect(team[0].name).toBe('books');
+    expect(team[0].memberNames).toEqual(["Eric", "Swapnil"]);
+  })));
+
+  it('should return team name for dvds', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+    let team: Team[] = [];
+    service.getTeam("dvds").subscribe(data => team[0] = data);
+    const req = httpTestingController.expectOne(mediaUrl + "dvds/team");
+    // Request is GET
+    expect(req.request.method).toEqual('GET');
+    // Respond with mock data
+    req.flush(mockTeams[4]);
+    // Assert
+    httpTestingController.verify();
+    tick();
+    expect(team[0]).toBeTruthy();
+    expect(team[0].name).toBe('dvds');
+    expect(team[0].memberNames).toEqual(["Bigyan", "Pawan"]);
+  })));
+
+  it('should return team name for laptops', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+    let team: Team[] = [];
+    service.getTeam("laptops").subscribe(data => team[0] = data);
+    const req = httpTestingController.expectOne(mediaUrl + "laptops/team");
+    // Request is GET
+    expect(req.request.method).toEqual('GET');
+    // Respond with mock data
+    req.flush(mockTeams[5]);
+    // Assert
+    httpTestingController.verify();
+    tick();
+    expect(team[0]).toBeTruthy();
+    expect(team[0].name).toBe('laptops');
+    expect(team[0].memberNames).toEqual(["Barry", "Nayaab"]);
+  })));
+
+  //post
+  it('should add a bike', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+    let bike: Bike[] = [];
+    service.addBike(mockBikes[0]).subscribe(data => bike[0] = data);
+    const req = httpTestingController.expectOne(infoUrl + "bikes/add");
+    // Request is GET
+    expect(req.request.method).toEqual('POST');
+    // Respond with mock data
+    req.flush(mockBikes[0]);
+    // Assert
+    httpTestingController.verify();
+    tick();
+    expect(bike[0].name).toBe("Mamba Sport 12\" Balance Bike");
+    expect(bike[0].brand).toBe('Mamba Bikes');
+    expect(bike[0].color).toBe('black');
+    expect(bike[0].price).toBe(75.88);
+  })));
+
+  it('should add food', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+    let food: Food[] = [];
+    service.addFood(mockFoods[0]).subscribe(data => food[0] = data);
+    const req = httpTestingController.expectOne(infoUrl + "food/add");
+    // Request is GET
+    expect(req.request.method).toEqual('POST');
+    // Respond with mock data
+    req.flush(mockFoods[0]);
+    // Assert
+    httpTestingController.verify();
+    tick();
+    expect(food[0].name).toBe('The Original Sandwich');
+    expect(food[0].brand).toBe('Oreo');
+    expect(food[0].weight).toBe('303g');
+    expect(food[0].calories).toBe(405);
+    expect(food[0].price).toBe(2.85);
+  })));
+
+  it('should add toys', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+    let toy: Toy[] = [];
+    service.addToy(mockToys[0]).subscribe(data => toy[0] = data);
+    const req = httpTestingController.expectOne(infoUrl + "toys/add");
+    // Request is GET
+    expect(req.request.method).toEqual('POST');
+    // Respond with mock data
+    req.flush(mockToys[0]);
+    // Assert
+    httpTestingController.verify();
+    tick();
+    expect(toy[0].name).toBe('Medical Kit');
+    expect(toy[0].brand).toBe('Fisher-Price');
+    expect(toy[0].age_group).toBe('3 to 9');
+    expect(toy[0].price).toBe(20.41);
+  })));
+
+  it('should add book', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+    let book: Book[] = [];
+    service.addBook(mockBooks[0]).subscribe(data => book[0] = data);
+    const req = httpTestingController.expectOne(mediaUrl + "books/add");
+    // Request is GET
+    expect(req.request.method).toEqual('POST');
+    // Respond with mock data
+    req.flush(mockBooks[0]);
+    // Assert
+    httpTestingController.verify();
+    tick();
+    expect(book).toBeTruthy();
+    expect(book[0].title).toBe('Lord of the Rings');
+    expect(book[0].author).toBe('J.R.R Tolkien');
+    expect(book[0].price).toBe(25.99);
+    expect(book[0].isbn).toBe('9780261102385');
+    expect(book[0].publisher).toBe('HarperCollins');
+  })));
+
+  it('should add dvd', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+    let dvd: Dvd[] = [];
+    service.addDvd(mockDvds[0]).subscribe(data => dvd[0] = data);
+    const req = httpTestingController.expectOne(mediaUrl + "dvds/add");
+    // Request is GET
+    expect(req.request.method).toEqual('POST');
+    // Respond with mock data
+    req.flush(mockDvds[0]);
+    // Assert
+    httpTestingController.verify();
+    tick();
+    expect(dvd).toBeTruthy();
+    expect(dvd[0].title).toBe('Avengers - Infinity War');
+    expect(dvd[0].rating).toBe('PG-13');
+    expect(dvd[0].studio).toBe('MARVEL');
+    expect(dvd[0].time).toBe(149);
+    expect(dvd[0].price).toBe(18.55);
+  })));
+
+  it('should add laptop', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+    let laptop: Laptop[] = [];
+    service.addLaptop(mockLaptops[0]).subscribe(data => laptop[0] = data);
+    const req = httpTestingController.expectOne(mediaUrl + "laptops/add");
+    // Request is GET
+    expect(req.request.method).toEqual('POST');
+    // Respond with mock data
+    req.flush(mockLaptops[0]);
+    // Assert
+    httpTestingController.verify();
+    tick();
+    expect(laptop).toBeTruthy();
+    expect(laptop[0].product).toBe('ThinkPad T430s');
+    expect(laptop[0].brand).toBe('Lenovo');
+    expect(laptop[0].cpu).toBe('core i5-3320');
+    expect(laptop[0].memory).toBe('8GB');
+    expect(laptop[0].price).toBe(325.09);
   })));
 
   //404
