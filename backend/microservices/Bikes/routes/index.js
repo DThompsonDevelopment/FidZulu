@@ -23,8 +23,14 @@ router.get("/bikes/all/:location", function (req, res, next) {
     next(createError(204));
   } else {
     console.log("got into /bikes/all/:location " + param);
-
+    console.log(salesTax[param]);
     const bikes = JSON.parse(read_json_file());
+
+    bikes.forEach((bike) => {
+      let price = bike.price * (1 + salesTax[param]);
+      bike.price = Math.round(price * 100) / 100;
+    });
+
     res.send(bikes);
   }
 });
