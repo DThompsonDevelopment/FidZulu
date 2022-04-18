@@ -8,6 +8,13 @@ console.log("Starting test");
 describe("Testing Get /", () => {
     describe("GET /", () => {
 
+        it("returns 404", (done) => {
+            request.get(base_url+"/fake", (error, response, body) => {
+                expect(response.statusCode).toBe(404);
+                done();
+            })
+        });
+
         it("returns status code 200", (done) => {
             request.get(base_url, (error, response, body) => {
                 expect(response.statusCode).toBe(200);

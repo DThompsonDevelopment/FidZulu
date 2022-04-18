@@ -11,10 +11,18 @@ router.get('/', function(req, res, next) {
 });
 
 // can process any existing query parameters 
-//(e.g.:?firstname=John)
 router.get('/books/all', (request, response, next) => { //this works
   let get_params = url.parse(request.url, true).query;
   console.log('got into books');
+  response.setHeader('content-type', 'application/json');
+
+  try {
+    response.end(JSON.stringify(books.list()));
+  } catch (err) {
+    next(createError(500));
+  }
+  
+  /*
   if (Object.keys(get_params).length == 0) {
     console.log('no params');
     response.setHeader('content-type', 'application/json');
@@ -33,6 +41,8 @@ router.get('/books/all', (request, response, next) => { //this works
       next(createError(404));
     }
   }
+  */
+
 });
 
 router.get('/books/all/Raleigh', (request, response, next) => {
@@ -73,6 +83,10 @@ router.get('/books/book-team', function(req, res) { //this is working
     "team": "Book Team",
     "membersNames": ["Swapnil Kha", "Eric Vo"]
   });
+});
+
+router.post('/books/add', function(req, res) {
+
 });
 
 module.exports = router;
