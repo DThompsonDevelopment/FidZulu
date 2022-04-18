@@ -1,7 +1,7 @@
 const createError = require('http-errors');
 const express = require('express');
 const router = express.Router();
-const contacts = require('../modules/books');
+const books = require('../modules/books');
 const url = require('url');
 
 
@@ -18,14 +18,14 @@ router.get('/books/all', (request, response, next) => {
   if (Object.keys(get_params).length == 0) {
     console.log('no params');
     response.setHeader('content-type', 'application/json');
-    response.end(JSON.stringify(contacts.list()));
+    response.end(JSON.stringify(books.list()));
   } else {
     // get first parameter only
     let key = Object.keys(get_params)[0];
     console.log("First key is: " + key);
     let value = request.query[key];
     console.log('params ' + value);
-    let result = contacts.query_by_arg(key, value);
+    let result = books.query_by_arg(key, value);
     if (result) {
       response.setHeader('content-type', 'application/json');
       response.end(JSON.stringify(result));
