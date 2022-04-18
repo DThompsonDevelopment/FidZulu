@@ -29,8 +29,6 @@ export class FidzulaService {
   constructor(private http: HttpClient) { }
 
 
-  
-
   public getTeam(type:string) : Observable<Team> {
     switch(type) {
       case 'bike': return this.http.get<Team>(this.bikes + "team").pipe(catchError(this.handleError));
