@@ -1,4 +1,4 @@
-<table class="table">
+<table *ngIf="hasItems()" class="table">
   <thead>
     <tr>
       <th *ngFor="let key of keyOrder">
