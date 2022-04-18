@@ -43,7 +43,9 @@ describe("Testing Books Endpoints", () => {
             request.get(usnc_url, (error, response, body) => {
                 expect(response.statusCode).toBe(200)
                 //check contents of body to ensure a list of books
-                expect(body).toContain("");
+                expect(JSON.parse(body).length).toBe(4);
+                expect(body).toContain("9780261102385");
+                expect(body).toContain("0064471195");
                 done();
             });
         });
@@ -54,7 +56,9 @@ describe("Testing Books Endpoints", () => {
             request.get(usnc_url, (error, response, body) => {
                 expect(response.statusCode).toBe(200)
                 //check contents of body to ensure a list of books
-                expect(body).toContain("");
+                expect(JSON.parse(body).length).toBe(4);
+                expect(body).toContain("9780261102385");
+                expect(body).toContain("0064471195");
                 done();
             });
         });
