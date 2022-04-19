@@ -9,6 +9,13 @@ exports.list = () => {
     return JSON.parse(read_json_file());
 };
 
+exports.addLaptop = (laptop) => {
+    let list = this.list();
+    list.push(laptop);
+    list = JSON.stringify(list);
+    fs.writeFileSync('./data/Laptopsjson.json', list);
+};
+
 exports.calculateTax = (location) => {
     let result = JSON.parse(read_json_file());
 

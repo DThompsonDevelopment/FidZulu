@@ -1,5 +1,5 @@
 const request = require("request");
-
+const fs = require('fs');
 const base_url = 'http://localhost:3035/';
 const laptop_url = base_url + 'laptops';
 
@@ -93,6 +93,48 @@ describe("Laptops Test Server", function () {
             });
         });
     });
+    describe("POST /laptops/add", () => {
+        it("should add laptop", (done) => {
+            let before = fs.readFileSync('./data/Laptopsjson.json');
+            let list = JSON.parse(before);
+            expect(list.length).toBe(4);
 
+            let laptop = {product:'test T430s', brand:'test', CPU:'test i5-3320',memory:'test',price:1111};
+            
+            request.post({
+                url: laptop_url + '/add',
+                body: laptop,
+                json: true
+            },
+            (err, res, body) => {
+                expect(res.statusCode).toBe(201);
+                let after = fs.readFileSync('./data/Laptopsjson.json');
+                let newlist = JSON.parse(after);
+                expect(newlist.length).toBe(5);
+                fs.writeFileSync('./data/Laptopsjson.json', before);
+                done();
+            });
+        });
+        it("should not add when missing field", (done) => {
+            let before = fs.readFileSync('./data/Laptopsjson.json');
+            let list = JSON.parse(before);
+            expect(list.length).toBe(4);
+
+            let laptop = {product:'test T430s',  CPU:'test i5-3320', memory:'test', price:1111};
+            
+            request.post({
+                url: laptop_url + '/add',
+                body: laptop,
+                json: true
+            },
+            (err, res, body) => {
+                expect(res.statusCode).toBe(404);
+                let after = fs.readFileSync('./data/Laptopsjson.json');
+                let newlist = JSON.parse(after);
+                expect(newlist.length).toBe(4);
+                done();
+            });
+        })
+    })
 
 });
