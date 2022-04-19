@@ -38,4 +38,12 @@ router.get("/dvds/all/:location", (req,res,next) => {
         response.end(JSON.stringify(dvdteam.list()));
     }
   });
+
+  router.post("/dvds/add", function (req, res, next) {
+ 
+    console.log("got into /bikes/add");
+    json = dvds.addDvd(req.body);
+  
+    res.send(json);
+  });
 module.exports = router;
