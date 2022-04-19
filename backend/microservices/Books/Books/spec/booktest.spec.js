@@ -2,11 +2,11 @@ let request = require("request");
 const base_url = "http://localhost:3034/books/all";
 const r_url = "http://localhost:3034/books/all/Raleigh";
 const d_url =  "http://localhost:3034/books/all/Durham";
-const bookteam_url = "http://localhost:3034/books/book-team";
+const bookteam_url = "http://localhost:3034/books/team";
 console.log("Starting test");
 
 describe("Testing Get /", () => {
-    describe("GET /", () => {
+    describe("GET /books/all", () => {
 
         it("returns 404", (done) => {
             request.get(base_url+"/fake", (error, response, body) => {
@@ -125,7 +125,7 @@ describe("Testing Get /", () => {
 
 
 
-    describe("GET /Durham", () => {
+    describe("GET /books/Durham", () => {
 
         it("returns status code 200", (done) => {
             request.get(d_url, (error, response, body) => {
@@ -161,7 +161,7 @@ describe("Testing Get /", () => {
 
     });
 
-    describe("GET /book-team", () => {
+    describe("GET books/team", () => {
 
         it("returns team info", (done) => {
             request.get(bookteam_url, (error, response, body) => {
@@ -187,12 +187,6 @@ describe("Testing Get /", () => {
         });
 
     });
-
-
-
-
-
-
 
 
 });

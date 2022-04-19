@@ -21,27 +21,6 @@ router.get('/books/all', (request, response, next) => { //this works
   } catch (err) {
     next(createError(500));
   }
-  
-  /*
-  if (Object.keys(get_params).length == 0) {
-    console.log('no params');
-    response.setHeader('content-type', 'application/json');
-    response.end(JSON.stringify(books.list()));
-  } else {
-    // get first parameter only
-    let key = Object.keys(get_params)[0];
-    console.log("First key is: " + key);
-    let value = request.query[key];
-    console.log('params ' + value);
-    let result = books.query_by_arg(key, value);
-    if (result) {
-      response.setHeader('content-type', 'application/json');
-      response.end(JSON.stringify(result));
-    } else {
-      next(createError(404));
-    }
-  }
-  */
 
 });
 
@@ -77,8 +56,7 @@ router.get('/books/all/Durham', (request, response, next) => {
   
 });
 
-
-router.get('/books/book-team', function(req, res) { //this is working
+router.get('/books/team', function(req, res) { //this is working
   res.json({
     "team": "Book Team",
     "membersNames": ["Swapnil Kha", "Eric Vo"]
@@ -86,7 +64,12 @@ router.get('/books/book-team', function(req, res) { //this is working
 });
 
 router.post('/books/add', function(req, res) {
-
+    res.send({
+      'Title': req.body.Title,
+      'Author': req.body.Author,
+      'price': req.body.price,
+      "ISBN": req.body.ISBN
+    });
 });
 
 module.exports = router;
