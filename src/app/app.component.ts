@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
     this.fetchData();
   }
 
-  private fetchData() {
+  fetchData() {
     this.service.getTeam(this.category).subscribe((data) => (this.team = data));
     switch (this.category) {
       case 'bikes':

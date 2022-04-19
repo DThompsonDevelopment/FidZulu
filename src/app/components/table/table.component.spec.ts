@@ -70,4 +70,26 @@ describe('TableComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('table')).toBeFalsy();
   });
+
+  it('should reset keyOrder on change to []', () => {
+    const spy = spyOn(component, 'ngOnChanges').and.callThrough();
+    component.items = [];
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(component.ngOnChanges).toHaveBeenCalled();
+      expect(component.hasItems()).toBeFalse();
+      expect(component.keyOrder).toBeUndefined();
+    });
+  });
+
+  it('should set keyOrder on change to items', () => {
+    const spy = spyOn(component, 'ngOnChanges').and.callThrough();
+    component.items = [{ name: 'chris', location: 'place' }];
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(component.ngOnChanges).toHaveBeenCalled();
+      expect(component.hasItems()).toBeTrue();
+      expect(component.keyOrder).toBe(['name', 'location']);
+    });
+  });
 });
