@@ -34,11 +34,8 @@ router.get('/team', function(req, res) {
 });
 
 router.post('/add', function(req, res) {
-  let obj = req.body;
-  res.status(201).send('made a new toy!');
-  db.push(obj);
-  console.log(db);
-  fs.writeFileSync('../data/toys.json', JSON.stringify(db, null, 4));
+  let toys = location.addToy('./data/toys.json', req.body);
+  res.status(201).send(toys);
 });
 
 module.exports = router;

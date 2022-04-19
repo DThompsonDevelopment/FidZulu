@@ -27,3 +27,12 @@ exports.tax = (toys, param) => {
         return toys;
     }
 }
+
+exports.addToy = (file, body) => {
+    let read = fs.readFileSync(file);
+    let parsed = JSON.parse(read);
+    const toys = parsed;
+    toys.push(body);
+    fs.writeFileSync(file, JSON.stringify(toys));
+    return toys;
+}
