@@ -8,7 +8,7 @@ console.log("Starting FoodService test");
 
 describe("GET /food/all/Raleigh", () => {
     it("returns correct status code", (done) => {
-        request.get(base_url, (error, response, body) => {
+        request.get(base_url + "food/all/Raleigh", (error, response, body) => {
             expect(response.statusCode).toBe(200);
             done();
         });
@@ -48,7 +48,8 @@ describe("GET /food/all/Durham", () => {
 
 describe("GET /food/all/NYC", () => {
     it("returns correct status code", (done) => {
-        request.get(base_url + "food/all/NYC", (error, response, body) => {
+        request.get(base_url + "food/all/NYC", (error, response, body) => {  
+            console.log(body) 
             expect(response.statusCode).toBe(404);
             done();
         });
