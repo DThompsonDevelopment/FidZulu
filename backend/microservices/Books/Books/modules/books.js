@@ -1,11 +1,25 @@
 const fs = require('fs');
 let read_json_file = () => {
     let file = './data/Booksjson.json';
-    return fs.readFileSync(file);
+    let read = undefined;
+    try {
+        read = fs.readFileSync(file);
+    } catch (err) {
+        throw new Error("Error reading JSON file");
+    }
+
+    return read;
 }
 
 exports.list = function() {
-    return JSON.parse(read_json_file());
+    let parsed = undefined;
+    try {
+        parsed = JSON.parse(read_json_file());
+    } catch (err) {
+        throw new Error("Error parsing JSON");
+    }
+
+    return parsed;
 }
 
 exports.get_raleigh = function() {
@@ -27,8 +41,7 @@ exports.get_durham = function() {
 }
 
 exports.add_book = (body) => {
-    //let list = this.list();
-    let list = JSON.parse(read_json_file());
+    let list = this.list();
     list.push(body);
     list = JSON.stringify(list);
     fs.writeFileSync(file, list);
