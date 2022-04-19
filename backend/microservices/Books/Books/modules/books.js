@@ -26,10 +26,10 @@ exports.get_durham = function() {
     return json_result;
 }
 
-exports.add_book = (Book) => {
+exports.add_book = (body) => {
     //let list = this.list();
     let list = JSON.parse(read_json_file());
-    list.push(Book);
+    list.push(body);
     list = JSON.stringify(list);
     fs.writeFileSync(file, list);
 }

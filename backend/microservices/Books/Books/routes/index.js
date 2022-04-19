@@ -69,7 +69,6 @@ router.post('/books/add', function(req, res, next) {
     books.add_book(book);
   } catch (err) {
     throw new Error("Unable to add",err);
-    // next(createError(500));
   }
 
 });
