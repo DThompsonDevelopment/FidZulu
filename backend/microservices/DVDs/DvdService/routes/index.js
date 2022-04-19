@@ -41,7 +41,7 @@ router.get("/dvds/all/:location", (req,res,next) => {
 
   router.post("/dvds/add", function (req, res, next) {
  
-    console.log("got into /bikes/add");
+    console.log("got into /dvds/add");
     json = dvds.addDvd(req.body);
   
     res.send(json);
