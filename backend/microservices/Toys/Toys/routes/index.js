@@ -6,6 +6,7 @@ const createError = require('http-errors');
 const url = require('url');
 let db = require('../data/toys.json');
 
+
 /* GET home page. */
 router.get('/toys', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -15,28 +16,14 @@ router.get('/all/:location', (req, res, next) => {
   const param = req.params.location;
   console.log('got into toys/all/:location ' + param);
 
-  const result = location.query_by_arg(
-    "location", param);
+  const result = location.list();
 
   console.log("location: " + param);
-  if (param == "raleigh") {
-    for(let i = 0; i < result.length; i++){
-      result[i].prize = Math.round((result[i].prize * 1.075) * 100) / 100;
-    }
-    console.log(result);
-    res.status(200).send(result);
-  }
-  else if(param == "durham") {
-    for(let i = 0; i < result.length; i++){
-      result[i].prize = Math.round((result[i].prize * 1.08) * 100) / 100;
-    }
-    console.log(result);
-    //res.send(result);
-    res.status(200).send(result);
-  } else {
-    //next(createError(404));
+  let toys = location.tax(result, param);
+  if (toys == null) {
     next(createError(404));
-    //console.log("fail");
+  } else {
+    res.status(200).send(toys);
   }
 });
 

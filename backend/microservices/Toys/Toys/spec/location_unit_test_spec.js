@@ -10,15 +10,15 @@ describe("Unit tests on locations module", () => {
             expect(results.length).toBe(4);
             expect(results[0].name).toBe("Medical Kit");
             expect(results[0].brand).toBe("Fisher-Price");
-            expect(results[0]['age-group']).toBe("3 to 9");
-            expect(results[0].prize).toBe(20.41);
+            expect(results[0].age_group).toBe("3 to 9");
+            expect(results[0].price).toBe(20.41);
             expect(results[1].name).toBe("Ferry Boat");
             expect(results[2].name).toBe("Rock-a-Stack");
             expect(results[3].name).toBe("Stack Up Cups");
         });
     });
 /*
-[{"name":"Medical Kit","brand":"Fisher-Price","age-group":"3 to 9","prize":22.04}
+[{"name":"Medical Kit","brand":"Fisher-Price","age-group":"3 to 9","price":22.04}
 */
 
 

@@ -11,9 +11,9 @@ describe("First Node Test Server", () => {
             request.get("http://localhost:3033/toys/all/raleigh",
                 (error, response, body) => {
                     const obj = JSON.parse(body);
-                    expect(obj[0].prize).toBeTruthy();
-                    //  console.log(obj[0].prize);
-                    expect(obj[0].prize).toEqual(21.94);
+                    expect(obj[0].price).toBeTruthy();
+                    //  console.log(obj[0].price);
+                    expect(obj[0].price).toEqual(21.94);
                     done();
                 });
         });
@@ -21,9 +21,9 @@ describe("First Node Test Server", () => {
             request.get("http://localhost:3033/toys/all/durham",
                 (error, response, body) => {
                     const obj = JSON.parse(body);
-                    expect(obj[0].prize).toBeTruthy();
-                    // console.log(obj[0].prize);
-                    expect(obj[0].prize).toEqual(22.04);
+                    expect(obj[0].price).toBeTruthy();
+                    // console.log(obj[0].price);
+                    expect(obj[0].price).toEqual(22.04);
                     done();
                 });
         });
