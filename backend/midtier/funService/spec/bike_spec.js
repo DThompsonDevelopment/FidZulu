@@ -6,21 +6,14 @@ const raleigh_url = base_url + "bikes/all/raleigh";
 describe("Testing Bikes Endpoint", () => {
 
   describe("GET fun/bikes", () => {
-    it("returns 400 on missing location", (done) => {
+    it("returns 404 on missing location", (done) => {
       request.get(base_url + "bikes", (error, response, body) => {
-        expect(response.statusCode).toBe(400);
+        expect(response.statusCode).toBe(404);
         done();
       });
     });
 
-    describe("Return 404 when argument is unknown", () => {
-      it("returns 404 on unknown arg", (done) => {
-        request.get(base_url + "bikes/all/florida", (error, response, body) => {
-          expect(response.statusCode).toBe(404);
-          done();
-        });
-      });
-    });
+
   });
 
   describe("Get fun/bikes/all/durham", () => {
@@ -46,4 +39,4 @@ describe("Testing Bikes Endpoint", () => {
       });
     });
   });
-})
+});

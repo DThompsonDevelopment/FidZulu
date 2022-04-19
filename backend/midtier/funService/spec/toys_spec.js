@@ -6,21 +6,13 @@ const raleigh_url = base_url + "toys/all/raleigh";
 describe("Testing Food Endpoint", () => {
 
   describe("GET fun/toys", () => {
-    it("returns 400 on missing location", (done) => {
+    it("returns 404 on missing location", (done) => {
       request.get(base_url + "toys", (error, response, body) => {
-        expect(response.statusCode).toBe(400);
+        expect(response.statusCode).toBe(404);
         done();
       });
     });
 
-    describe("Return 404 when argument is unknown", () => {
-      it("returns 404 on unknown arg", (done) => {
-        request.get(base_url + "toys/all/rhodeisland", (error, response, body) => {
-          expect(response.statusCode).toBe(404);
-          done();
-        });
-      });
-    });
   });
 
   describe("Get fun/toys/all/durham", () => {
