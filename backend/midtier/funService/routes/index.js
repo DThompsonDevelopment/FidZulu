@@ -13,10 +13,11 @@ res.end(JSON.stringify(team));
 });
 
 // bikes endpoint
-const path = "https://12d3ba80-8db1-4d1c-95f1-0c8dfccaba3a.mock.pstmn.io//fun/";
+//const path = "https://12d3ba80-8db1-4d1c-95f1-0c8dfccaba3a.mock.pstmn.io//fun/";
+const bikesPath = "http://localhost:3031"
 router.get('/fun/bikes/all/:location', async function(req, res, next) {
   const location = req.params.location
-  let endpoint_res = await axios.get(path + '/bikes/all/' + location);
+  let endpoint_res = await axios.get(bikesPath + '/bikes/all/' + location);
   res.end(JSON.stringify(endpoint_res.data));
 });
 
@@ -45,7 +46,7 @@ router.get('/fun/food/team', async function(req, res, next) {
 });
 
 router.get('/fun/bikes/team', async function(req, res, next) {
-  let endpoint_res = await axios.get(path + '/bikes/team');
+  let endpoint_res = await axios.get(bikesPath + '/bikes/team');
   res.end(JSON.stringify(endpoint_res.data));
 });
 
