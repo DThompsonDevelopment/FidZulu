@@ -239,7 +239,7 @@ describe('FidzulaService', () => {
   let bikesTeam = infoUrl + 'bikes/team';
   
   let food = infoUrl + 'food/all/';
-  let foodDurham = infoUrl + 'food/all/' + durham;
+  let foodDurham = food + durham;
   let foodTeam = infoUrl + 'food/team';
   
   let toys = infoUrl + 'toys/all/';
