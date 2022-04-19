@@ -64,12 +64,17 @@ router.get('/books/team', function(req, res) { //this is working
 });
 
 router.post('/books/add', function(req, res) {
+  try {
     res.send({
       'Title': req.body.Title,
       'Author': req.body.Author,
       'price': req.body.price,
       "ISBN": req.body.ISBN
     });
+  } catch (err) {
+    nextends(createError(500));
+  }
+    
 });
 
 module.exports = router;
