@@ -67,9 +67,9 @@ router.post('/books/add', function(req, res, next) {
   let book = req.body;
   try {
     books.add_book(book);
-    response.status(201).send();
   } catch (err) {
-    next(createError(500));
+    throw new Error("Unable to add",err);
+    // next(createError(500));
   }
 
 });
