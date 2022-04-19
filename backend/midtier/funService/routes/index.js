@@ -22,9 +22,10 @@ router.get('/fun/bikes/all/:location', async function(req, res, next) {
 });
 
 //food endpoint
+const foodPath = "http://localhost:3032"
 router.get('/fun/food/all/:location', async function(req, res, next) {
   const location = req.params.location
-  let endpoint_res = await axios.get(path + '/food/all/' + location);
+  let endpoint_res = await axios.get(foodPath + '/food/all/' + location);
   res.end(JSON.stringify(endpoint_res.data));
 });
 
@@ -41,7 +42,7 @@ router.get('/fun/toys/team', async function(req, res, next) {
 });
 
 router.get('/fun/food/team', async function(req, res, next) {
-  let endpoint_res = await axios.get(path + '/food/team');
+  let endpoint_res = await axios.get(foodPath + '/food/team');
   res.end(JSON.stringify(endpoint_res.data));
 });
 
