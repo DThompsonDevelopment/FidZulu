@@ -12,7 +12,7 @@ describe("Testing dvds Endpoints", () => {
     describe("GET media/dvds", () => {
         it("returns 400 on missing location", (done) => {
             request.get(base_url+'dvds', (error, response, body) => {
-                expect(response.statusCode).toBe(400);
+                expect(response.statusCode).toBe(404);
                 done();
             });
         });
