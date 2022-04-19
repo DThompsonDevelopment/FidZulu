@@ -5,7 +5,7 @@ const path = 'https://a868ef5c-e9f3-417d-9441-1acca240b247.mock.pstmn.io/media'
 
 
 
-function renameKey ( obj, oldKey, newKey ) {
+function renameKey (obj, oldKey, newKey ) {
   obj[newKey] = obj[oldKey];
   delete obj[oldKey];
 }
