@@ -26,7 +26,7 @@ router.get('/laptops/team', function(request, response, next) {
 router.post('/laptops/add', function(request, response, next){
   let laptop = request.body;
   if(laptop.product == undefined || laptop.brand == undefined || laptop.CPU == undefined || laptop.memory == undefined || laptop.price == undefined){
-    next(createError(404));
+    next(createError(400));
   }
   else {
     laptopDao.addLaptop(laptop);

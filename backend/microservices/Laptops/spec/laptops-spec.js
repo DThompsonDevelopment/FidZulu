@@ -128,7 +128,7 @@ describe("Laptops Test Server", function () {
                 json: true
             },
             (err, res, body) => {
-                expect(res.statusCode).toBe(404);
+                expect(res.statusCode).toBe(400);
                 let after = fs.readFileSync('./data/Laptopsjson.json');
                 let newlist = JSON.parse(after);
                 expect(newlist.length).toBe(4);
