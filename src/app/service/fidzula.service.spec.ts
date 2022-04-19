@@ -461,6 +461,25 @@ describe('FidzulaService', () => {
     expect(team[0].memberNames).toEqual(["Barry", "Nayaab"]);
   })));
 
+  it('should throw an error for an unexisting team name', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+    try {
+      let team: Team[] = [];
+      service.getTeam("test").subscribe(data => team[0] = data);
+      const req = httpTestingController.expectOne(mediaUrl + "laptops/team");
+      // Request is GET
+      expect(req.request.method).toEqual('GET');
+      // Respond with mock data
+      req.flush(mockTeams[5]);
+      // Assert
+      httpTestingController.verify();
+      tick();
+    }catch(e) {
+      let err:string = String(e);
+      expect(err).toBe('Error: Undefined team...');
+    }
+    
+  })));
+
   //post
   it('should add a bike', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let bike: Bike[] = [];
