@@ -27,9 +27,12 @@ describe("Testing Food Endpoint", () => {
     it("returns all of the food in durham", (done) => {
       request.get(durham_url, (error, response, body) => {
         expect(response.statusCode).toBe(200);
-        // expect(JSON.parse(body).length).toBe(4);
-        // expect(body).toContain("DJ Bikes");
-        // expect(body).toContain("Kobe");
+        expect(JSON.parse(body).length).toBe(4);
+        expect(body).toContain("Peanut Butter");
+        expect(body).toContain("Kraft");
+        expect(body).toContain("2000g");
+        expect(body).toContain(726);
+        expect(body).toContain(9.39);
         done();
       });
     });
@@ -39,9 +42,12 @@ describe("Testing Food Endpoint", () => {
     it("returns all of the food in raliegh", (done) => {
       request.get(raleigh_url, (error, response, body) => {
         expect(response.statusCode).toBe(200);
-        // expect(JSON.parse(body).length).toBe(4);
-        // expect(body).toContain("DJ Bikes");
-        // expect(body).toContain("Kobe");
+         expect(JSON.parse(body).length).toBe(4);
+         expect(body).toContain("Peanut Butter");
+         expect(body).toContain("Kraft");
+         expect(body).toContain("2000g");
+         expect(body).toContain(726);
+         expect(body).toContain(9.39);
         done();
       });
     });

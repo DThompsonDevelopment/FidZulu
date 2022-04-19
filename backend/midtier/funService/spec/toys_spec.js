@@ -27,9 +27,11 @@ describe("Testing Food Endpoint", () => {
     it("returns all of the toys in durham", (done) => {
       request.get(durham_url, (error, response, body) => {
         expect(response.statusCode).toBe(200);
-        // expect(JSON.parse(body).length).toBe(4);
-        // expect(body).toContain("DJ Bikes");
-        // expect(body).toContain("Kobe");
+         expect(JSON.parse(body).length).toBe(4);
+         expect(body).toContain("Medical Kit");
+         expect(body).toContain("Fisher-Price");
+         expect(body).toContain("3 to 9");
+         expect(body).toContain(20.41);
         done();
       });
     });
@@ -39,9 +41,10 @@ describe("Testing Food Endpoint", () => {
     it("returns all of the toys in raliegh", (done) => {
       request.get(raleigh_url, (error, response, body) => {
         expect(response.statusCode).toBe(200);
-        // expect(JSON.parse(body).length).toBe(4);
-        // expect(body).toContain("DJ Bikes");
-        // expect(body).toContain("Kobe");
+        expect(body).toContain("Ferry Boat");
+        expect(body).toContain("Green Toys");
+        expect(body).toContain("3 to 6");
+        expect(body).toContain(13.26);
         done();
       });
     });
