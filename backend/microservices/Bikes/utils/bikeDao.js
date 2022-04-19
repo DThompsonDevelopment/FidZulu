@@ -45,29 +45,38 @@ const getJSON = (param, next) => {
 
     return bikes;
   }
+};
 
-  };
+const getJSONPost = () => {
+  const bikes = parseJSONFile("./data/Bikejson.json");
 
-  const getJSONPost = () => {
+  return bikes;
+};
 
-    const bikes = parseJSONFile("./data/Bikejson.json");
+function addBike(body) {
+  if (
+    !body.hasOwnProperty("name") ||
+    !body.hasOwnProperty("brand") ||
+    !body.hasOwnProperty("color") ||
+    !body.hasOwnProperty("price") ||
+    Object.keys(body).length !== 4
+  ) {
+    throw new Error("bad bike");
+  }
 
-    return bikes;
-  };
+  var json = getJSONPost();
+  json.push(body);
+  console.log(json);
 
-  function addBike(body){
-    var json = getJSONPost();
-    json.push(body);
-    console.log(json);
+  fs.writeFileSync("./data/Bikejson.json", JSON.stringify(json));
 
-    fs.writeFileSync("./data/Bikejson.json",JSON.stringify(json));
-
-    return json;
-  };
+  return json;
+}
 
 module.exports = {
   parseJSONFile,
   applyTax,
   getJSON,
-  addBike
+  addBike,
+  getJSONPost,
 };

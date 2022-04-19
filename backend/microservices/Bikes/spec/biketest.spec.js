@@ -1,7 +1,12 @@
 let request = require("request");
-var fs = require('fs');
-const { parseJSONFile, getJSON, applyTax } = require("../utils/bikeDao");
-var _ = require('lodash');
+var fs = require("fs");
+const {
+  parseJSONFile,
+  getJSON,
+  applyTax,
+  getJSONPost,
+} = require("../utils/bikeDao");
+var _ = require("lodash");
 const base_url = "http://localhost:3031/";
 console.log("Starting test");
 
@@ -62,19 +67,19 @@ const alteredBikes = [
 let beforeJson;
 let afterJson;
 
-beforeEach(()=>{
-    beforeJson = parseJSONFile("./data/Bikejson.json");
+beforeEach(() => {
+  beforeJson = parseJSONFile("./data/Bikejson.json");
 });
-afterEach(()=>{
-    afterJson = parseJSONFile("./data/Bikejson.json");
-     if(!_.isEqual(beforeJson, afterJson)){ 
-        fs.writeFileSync("./data/Bikejson.json",JSON.stringify(beforeJson));
-     }
+afterEach(() => {
+  afterJson = parseJSONFile("./data/Bikejson.json");
+  if (!_.isEqual(beforeJson, afterJson)) {
+    console.log("overwrite");
+    fs.writeFileSync("./data/Bikejson.json", JSON.stringify(beforeJson));
+  }
 });
 
 describe("Testing HTTP Endpoints", () => {
   describe("Testing /bikes/all/:location", () => {
-
     it("testing Durham location", (done) => {
       let bike = {
         name: 'Mamba Sport 12" Balance Bike',
@@ -145,11 +150,11 @@ describe("Testing HTTP Endpoints", () => {
       });
     });
 
-    it("should parse JSON file", () => {
+    it("should parse JSON file", () => { //util
       expect(getJSON("raleigh", null)).toEqual(bikes);
     });
 
-    it("should tax each bike", () => {
+    it("should tax each bike", () => { //util
       expect(applyTax(bikes, "raleigh")).toEqual(alteredBikes);
     });
   });
@@ -169,9 +174,102 @@ describe("Testing HTTP Endpoints", () => {
     });
 
     describe("Testing /bikes/add", () => {
+      it("testing bike gets added", (done) => {
+        let test = {
+          name: "bike",
+          brand: "brand",
+          color: "color",
+          price: 100.36,
+        };
 
+        const oldSize = getJSONPost().length;
 
+        const url = base_url + "bikes/add";
+        request(
+          {
+            url: url,
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: test,
+            json: true,
+          },
+          () => {
+            const bikes = getJSONPost();
+            const newSize = bikes.length;
 
+            expect(newSize).toBe(oldSize + 1);
+            expect(bikes).toContain(test);
+            done();
+          }
+        );
+      });
+
+      it("testing error handling", (done) => {
+        let test = {
+          nameo: "bike",
+          brand: "brand",
+          color: "color",
+          price: 100.36,
+        };
+
+        const oldSize = getJSONPost().length;
+
+        const url = base_url + "bikes/add";
+        request(
+          {
+            url: url,
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: test,
+            json: true,
+          },
+          (error, response, body) => {
+            const bikes = getJSONPost();
+            const newSize = bikes.length;
+
+            expect(response.statusCode).toBe(500);
+            expect(newSize).toBe(oldSize);
+            done();
+          }
+        );
+      });
+
+      it("testing error handling", (done) => {
+        let test = {
+          name: "bike",
+          brand: "brand",
+          color: "color",
+          price: 100.36,
+          gender: "",
+        };
+
+        const oldSize = getJSONPost().length;
+
+        const url = base_url + "bikes/add";
+        request(
+          {
+            url: url,
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: test,
+            json: true,
+          },
+          (error, response, body) => {
+            const bikes = getJSONPost();
+            const newSize = bikes.length;
+
+            expect(response.statusCode).toBe(500);
+            expect(newSize).toBe(oldSize);
+            done();
+          }
+        );
+      });
     });
   });
 });
