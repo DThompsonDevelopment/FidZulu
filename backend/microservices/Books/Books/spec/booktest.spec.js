@@ -188,5 +188,18 @@ describe("Testing Get /", () => {
 
     });
 
+    // describe("POST books/all", () => {
+
+    //     it("posts a new book", (done) => {
+    //         request.post(base_url, (error, response, body) => {
+    //             parsed_body = JSON.parse(body)
+    //             expect(body).toContain("team");
+    //             expect(body).toContain("membersNames");
+    //             done();
+    //         });
+    //     });
+
+    // });
+
 
 });

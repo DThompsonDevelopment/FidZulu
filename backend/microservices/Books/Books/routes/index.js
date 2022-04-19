@@ -51,7 +51,7 @@ router.get('/books/all/Durham', (request, response, next) => {
       next(createError(404));
     }
   } catch (err) {
-    nextends(createError(500));
+    next(createError(500));
   }
   
 });
@@ -64,17 +64,13 @@ router.get('/books/team', function(req, res) { //this is working
 });
 
 router.post('/books/add', function(req, res) {
+  let book = req.body;
   try {
-    res.send({
-      'Title': req.body.Title,
-      'Author': req.body.Author,
-      'price': req.body.price,
-      "ISBN": req.body.ISBN
-    });
+    books.add_book(book)
   } catch (err) {
-    nextends(createError(500));
+    next(createError(500));
   }
-    
+
 });
 
 module.exports = router;
