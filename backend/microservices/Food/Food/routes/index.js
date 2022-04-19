@@ -22,25 +22,39 @@ router.get('/food/team', (req, res, next) => {
   res.json({ team: "Food", membersNames: ["Jon Riley, Dillon Gorlesky, Dakota Thompson"] });
 })
 
-router.get('/food/all/:location', (req, res) => {
-  let loc = req.params;
-  let tax = 0;
-  if (/\b[Dd][Uu][Rr][Hh][Aa][Mm]\b/g.test(loc.location)) {//Durham location
-    tax = 0.075; //7.5% Tax
-  } else if (/\b[Rr][Aa][Ll][Ee][Ii][Gg][Hh]\b/g.test(loc.location)) {//Raleigh location
-    tax = 0.08; //8% Tax
-  } else {
-    //Throw error
-    console.log("else")
-  }
-
+function calculateTaxAndSendJSON(tax, res) {
   let data = readFoodDataSync();
   for (let jsonObj of data) {
     let price = jsonObj.price + (jsonObj.price * tax);
     jsonObj.price = price.toFixed(2);
   }
   res.json(data);
+}
+
+router.get('/food/all/:location', (req, res) => {
+  let location = req.params['location'].toLowerCase();
+  let tax = 0;
+
+  if (location === 'durham') {
+    tax = 0.075;
+    calculateTaxAndSendJSON(tax, res);
+  }
+  else if (location === 'raleigh') {
+    tax = 0.08;
+    calculateTaxAndSendJSON(tax, res);
+  } 
+  else {
+    res.status(404);
+    res.json(
+      {
+        "error": "No resource found",
+        "message": "Cannot locate " + location,
+      }
+    )
+  }
+
 })
+
 
 router.post('/food/add', (req, res, next) => {
 
@@ -57,8 +71,8 @@ router.post('/food/add', (req, res, next) => {
     res.statusCode = 400;
     res.json(
       {
-        "error": "data type error",
-        "message": "Incorrect data type passed from body",
+        "error": "Incorrect data sent",
+        "message": "Error in setting props frrom body",
       }
     );
   } else {
