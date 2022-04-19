@@ -9,6 +9,9 @@ describe('My First Test', () => {
   it('click on getBikesWithLocation is Raleigh', () => {
     //Need to modfiy for two dropdowns
 
+    cy.get('thead')
+    .contains("Brand");
+
     //serviceD is a class name for select
     cy.get('.services').select('Bikes');
     cy.get('.locations').select('Raleigh');
@@ -32,9 +35,7 @@ describe('My First Test', () => {
     cy.get('tbody')
       .contains(237.96);
 
-
-    cy.get('thead')
-      .contains("BRAND");
+  
 
   })
 
@@ -61,7 +62,7 @@ describe('My First Test', () => {
     
     //weight column should exist
     cy.get('thead')
-      .contains("WEIGHT");
+      .contains("Weight");
 
     //Original price should not exist
     cy.get('tbody')
@@ -96,7 +97,7 @@ describe('My First Test', () => {
       .should('not.exist');
     //Age-Group Should Exist in column
     cy.get('thead')
-      .contains("AGE-GROUP");
+      .contains("Age-Group");
 
     //CHECK FOR CORRECT PRICE
     cy.get('tbody')
@@ -131,7 +132,7 @@ describe('Class B Service Tests', () => {
     
     //Author Column Should Exist
     cy.get('thead')
-      .contains("AUTHOR");
+      .contains("Author");
 
     //Original price should not exist
     cy.get('tbody')
@@ -147,7 +148,7 @@ describe('Class B Service Tests', () => {
     
     //Studio Column Should Exist
     cy.get('thead')
-      .contains("STUDIO");
+      .contains("Studio");
 
     cy.get('tbody')
       .contains('TEST DVD')
@@ -182,7 +183,7 @@ describe('Class B Service Tests', () => {
     
     //MEMORY Column Should Exist
     cy.get('thead')
-      .contains("MEMORY");
+      .contains("Memory");
 
     cy.get('tbody')
       .contains('TEST Laptop')
