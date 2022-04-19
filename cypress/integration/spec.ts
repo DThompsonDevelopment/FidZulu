@@ -32,6 +32,10 @@ describe('My First Test', () => {
     cy.get('tbody')
       .contains(237.96);
 
+
+    cy.get('thead')
+      .contains("BRAND");
+
   })
 
 
@@ -54,6 +58,10 @@ describe('My First Test', () => {
     //Food calories should exist
     cy.get('tbody')
       .contains(525);
+    
+    //weight column should exist
+    cy.get('thead')
+      .contains("WEIGHT");
 
     //Original price should not exist
     cy.get('tbody')
@@ -86,6 +94,9 @@ describe('My First Test', () => {
     cy.get('tbody')
       .contains(3.99)
       .should('not.exist');
+    //Age-Group Should Exist in column
+    cy.get('thead')
+      .contains("AGE-GROUP");
 
     //CHECK FOR CORRECT PRICE
     cy.get('tbody')
@@ -95,7 +106,7 @@ describe('My First Test', () => {
 })
 
 
-//Class A Tests
+//Class B Tests
 describe('Class B Service Tests', () => {
   //Get All Books
   it('click on getBooksWithLocation is Raleigh', () => {
@@ -118,7 +129,9 @@ describe('Class B Service Tests', () => {
     cy.get('tbody')
       .contains('J.R.R Tolkien');
     
-    //CHECK FOR CORRECT PRICE
+    //Author Column Should Exist
+    cy.get('thead')
+      .contains("AUTHOR");
 
     //Original price should not exist
     cy.get('tbody')
@@ -132,6 +145,10 @@ describe('Class B Service Tests', () => {
     cy.get('.services').select('DVDs');
     cy.get('.locations').select('Durham');
     
+    //Studio Column Should Exist
+    cy.get('thead')
+      .contains("STUDIO");
+
     cy.get('tbody')
       .contains('TEST DVD')
       .should('not.exist');
@@ -163,6 +180,10 @@ describe('Class B Service Tests', () => {
     cy.get('.services').select('Laptops');
     cy.get('.locations').select('Raleigh');
     
+    //MEMORY Column Should Exist
+    cy.get('thead')
+      .contains("MEMORY");
+
     cy.get('tbody')
       .contains('TEST Laptop')
       .should('not.exist');
