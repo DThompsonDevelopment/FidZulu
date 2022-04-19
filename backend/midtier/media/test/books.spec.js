@@ -10,9 +10,9 @@ describe("Testing Books Endpoints", () => {
     //negative testing
     //bad requests returns 400
     describe("GET media/books", () => {
-        it("returns 404 on missing location", (done) => {
+        it("returns 400 on missing location", (done) => {
             request.get(base_url+'books', (error, response, body) => {
-                expect(response.statusCode).toBe(404);
+                expect(response.statusCode).toBe(400);
                 done();
             });
         });

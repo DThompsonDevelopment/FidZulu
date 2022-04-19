@@ -16,12 +16,6 @@ describe("Testing dvds Endpoints", () => {
                 done();
             });
         });
-        it("returns 404 on unknown arguments", (done) => {
-            request.get(base_url+'dvds/all/rhodeisland', (error, response, body) => {
-                expect(response.statusCode).toBe(404);
-                done();
-            });
-        });
     });
 
     //happy path
