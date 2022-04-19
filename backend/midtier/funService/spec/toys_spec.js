@@ -1,0 +1,49 @@
+let request = require("request");
+const base_url = "http://localhost:3021/fun/";
+const durham_url = base_url + "toys/all/durham";
+const raleigh_url = base_url + "toys/all/raleigh";
+
+describe("Testing Food Endpoint", () => {
+
+  describe("GET fun/toys", () => {
+    it("returns 400 on missing location", (done) => {
+      request.get(base_url + "toys", (error, response, body) => {
+        expect(response.statusCode).toBe(400);
+        done();
+      });
+    });
+
+    describe("Return 404 when argument is unknown", () => {
+      it("returns 404 on unknown arg", (done) => {
+        request.get(base_url + "toys/all/rhodeisland", (error, response, body) => {
+          expect(response.statusCode).toBe(404);
+          done();
+        });
+      });
+    });
+  });
+
+  describe("Get fun/toys/all/durham", () => {
+    it("returns all of the toys in durham", (done) => {
+      request.get(durham_url, (error, response, body) => {
+        expect(response.statusCode).toBe(200);
+        // expect(JSON.parse(body).length).toBe(4);
+        // expect(body).toContain("DJ Bikes");
+        // expect(body).toContain("Kobe");
+        done();
+      });
+    });
+  });
+
+  describe("Get fun/toys/all/raleigh", () => {
+    it("returns all of the toys in raliegh", (done) => {
+      request.get(raleigh_url, (error, response, body) => {
+        expect(response.statusCode).toBe(200);
+        // expect(JSON.parse(body).length).toBe(4);
+        // expect(body).toContain("DJ Bikes");
+        // expect(body).toContain("Kobe");
+        done();
+      });
+    });
+  });
+})
