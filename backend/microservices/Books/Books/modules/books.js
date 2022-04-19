@@ -27,9 +27,8 @@ exports.get_durham = function() {
 }
 
 exports.add_book = (Book) => {
-    Console.log("test");
-    let list = this.list();
-    console.log(list)
+    //let list = this.list();
+    let list = JSON.parse(read_json_file());
     list.push(Book);
     list = JSON.stringify(list);
     fs.writeFileSync(file, list);
