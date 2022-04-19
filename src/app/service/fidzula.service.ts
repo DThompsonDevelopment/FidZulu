@@ -13,14 +13,14 @@ import { Team } from '../models/teams';
   providedIn: 'root',
 })
 export class FidzulaService {
-  //class A
-  private infoUrl = 'http://localhost:3021/';
+  //class A (fun)
+  private infoUrl = 'http://localhost:3021/fun/';
   private bikes = this.infoUrl + 'bikes/';
   private food = this.infoUrl + 'food/';
   private toys = this.infoUrl + 'toys/';
 
-  //class B
-  private mediaUrl = 'http://localhost:3022/';
+  //class B (media)
+  private mediaUrl = 'http://localhost:3022/media/';
   private books = this.mediaUrl + 'books/';
   private dvds = this.mediaUrl + 'dvds/';
   private laptops = this.mediaUrl + 'laptops/';
@@ -29,6 +29,14 @@ export class FidzulaService {
 
   public getTeam(type: string): Observable<Team> {
     switch (type) {
+      case 'media':
+        return this.http
+          .get<Team>(this.mediaUrl + 'team')
+          .pipe(catchError(this.handleError));
+      case 'fun':
+        return this.http
+          .get<Team>(this.infoUrl + 'team')
+          .pipe(catchError(this.handleError));
       case 'bikes':
         return this.http
           .get<Team>(this.bikes + 'team')
@@ -62,7 +70,7 @@ export class FidzulaService {
   //bikes
   public getBikesWithLocation(location: string): Observable<Bike[]> {
     return this.http
-      .get<Bike[]>(this.bikes + location)
+      .get<Bike[]>(this.bikes + 'all/' +location)
       .pipe(catchError(this.handleError));
   }
   public addBike(bike: Bike): Observable<Bike> {
@@ -74,7 +82,7 @@ export class FidzulaService {
   //food
   public getFoodsWithLocation(location: string): Observable<Food[]> {
     return this.http
-      .get<Food[]>(this.food + location)
+      .get<Food[]>(this.food + 'all/' +location)
       .pipe(catchError(this.handleError));
   }
   public addFood(food: Food): Observable<Food> {
@@ -86,7 +94,7 @@ export class FidzulaService {
   //toys
   public getToysWithLocation(location: string): Observable<Toy[]> {
     return this.http
-      .get<Toy[]>(this.toys + location)
+      .get<Toy[]>(this.toys + 'all/' +location)
       .pipe(catchError(this.handleError));
   }
   public addToy(toy: Toy): Observable<Toy> {
@@ -100,7 +108,7 @@ export class FidzulaService {
   //books
   public getBooksWithLocation(location: string): Observable<Book[]> {
     return this.http
-      .get<Book[]>(this.books + location)
+      .get<Book[]>(this.books + 'all/' +location)
       .pipe(catchError(this.handleError));
   }
   public addBook(book: Book): Observable<Book> {
@@ -112,7 +120,7 @@ export class FidzulaService {
   //dvds
   public getDvdsWithLocation(location: string): Observable<Dvd[]> {
     return this.http
-      .get<Dvd[]>(this.dvds + location)
+      .get<Dvd[]>(this.dvds + 'all/' +location)
       .pipe(catchError(this.handleError));
   }
   public addDvd(dvd: Dvd): Observable<Dvd> {
@@ -124,7 +132,7 @@ export class FidzulaService {
   //laptops
   public getLaptopsWithLocation(location: string): Observable<Laptop[]> {
     return this.http
-      .get<Laptop[]>(this.laptops + location)
+      .get<Laptop[]>(this.laptops + 'all/' +location)
       .pipe(catchError(this.handleError));
   }
   public addLaptop(laptop: Laptop): Observable<Laptop> {

@@ -212,6 +212,14 @@ const mockTeams:Team[] =[
   {
     "name": "laptops",
     "memberNames": ["Barry", "Nayaab"]
+  },
+  {
+    "name": "media",
+    "memberNames": ["Pranav", "Dev", "Ty"]
+  },
+  {
+    "name": "fun",
+    "memberNames": ["Mike", "Peter", "Vahe"]
   }
 ]
 
@@ -219,8 +227,54 @@ const mockTeams:Team[] =[
 describe('FidzulaService', () => {
 
   let httpTestingController: HttpTestingController;
-  let infoUrl =  "http://localhost:3021/";
-  let mediaUrl = "http://localhost:3022/";
+
+  let raleigh = "Raleigh";
+  let durham = "Durham";
+  //class A (fun)
+  let infoUrl = 'http://localhost:3021/fun/';
+
+  let bikes = infoUrl + 'bikes/all/';
+  let bikesRaleigh = bikes + raleigh;
+  let bikesDurham = bikes + durham;
+  let bikesTeam = infoUrl + 'bikes/team';
+  
+  let food = infoUrl + 'food/all/';
+  let foodDurham = infoUrl + 'food/all/' + durham;
+  let foodTeam = infoUrl + 'food/team';
+  
+  let toys = infoUrl + 'toys/all/';
+  let toysDurham = toys + durham;
+  let toysTeam = infoUrl + 'toys/team';
+
+  let funTeam = infoUrl + 'team';
+
+  //post
+  let bikesAdd = infoUrl + 'bikes/add';
+  let foodAdd = infoUrl + 'food/add';
+  let toysAdd = infoUrl + 'toys/add';
+
+  //class B (media)
+  let mediaUrl = 'http://localhost:3022/media/';
+
+  let books = mediaUrl + 'books/all/';
+  let booksRaleigh = books + raleigh;
+  let booksDurham = books + durham;
+  let booksTeam = mediaUrl + 'books/team';
+  
+  let dvds = mediaUrl + 'dvds/all/';
+  let dvdsDurham = dvds + durham;
+  let dvdsTeam = mediaUrl + 'dvds/team';
+  
+  let laptops = mediaUrl + 'laptops/all/';
+  let laptopsDurham = laptops + durham;
+  let laptopsTeam = mediaUrl + 'laptops/team';
+
+  let mediaTeam = mediaUrl + 'team';
+
+  //post
+  let booksAdd = mediaUrl + 'books/add';
+  let dvdsAdd = mediaUrl + 'dvds/add';
+  let laptopsAdd = mediaUrl + 'laptops/add';
   
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -236,8 +290,8 @@ describe('FidzulaService', () => {
 
   it('should return bikes with location Raleigh', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let bikes: Bike[] = [];
-    service.getBikesWithLocation("Raleigh").subscribe(data => bikes = data);
-    const req = httpTestingController.expectOne(infoUrl + "bikes/Raleigh");
+    service.getBikesWithLocation(raleigh).subscribe(data => bikes = data);
+    const req = httpTestingController.expectOne(bikesRaleigh);
     // Request is GET
     expect(req.request.method).toEqual('GET');
     // Respond with mock data
@@ -254,8 +308,8 @@ describe('FidzulaService', () => {
 
   it('should return bikes with location Durham', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let bikes: Bike[] = [];
-    service.getBikesWithLocation("Durham").subscribe(data => bikes = data);
-    const req = httpTestingController.expectOne(infoUrl + "bikes/Durham");
+    service.getBikesWithLocation(durham).subscribe(data => bikes = data);
+    const req = httpTestingController.expectOne(bikesDurham);
     // Request is GET
     expect(req.request.method).toEqual('GET');
     // Respond with mock data
@@ -272,8 +326,8 @@ describe('FidzulaService', () => {
 
   it('should return foods with location Durham', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let food: Food[] = [];
-    service.getFoodsWithLocation("Durham").subscribe(data => food = data);
-    const req = httpTestingController.expectOne(infoUrl + "food/Durham");
+    service.getFoodsWithLocation(durham).subscribe(data => food = data);
+    const req = httpTestingController.expectOne(foodDurham);
     // Request is GET
     expect(req.request.method).toEqual('GET');
     // Respond with mock data
@@ -291,8 +345,8 @@ describe('FidzulaService', () => {
 
   it('should return toys with location Durham', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let toys: Toy[] = [];
-    service.getToysWithLocation("Durham").subscribe(data => toys = data);
-    const req = httpTestingController.expectOne(infoUrl + "toys/Durham");
+    service.getToysWithLocation(durham).subscribe(data => toys = data);
+    const req = httpTestingController.expectOne(toysDurham);
     // Request is GET
     expect(req.request.method).toEqual('GET');
     // Respond with mock data
@@ -309,8 +363,8 @@ describe('FidzulaService', () => {
 
   it('should return books with location Durham', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let books: Book[] = [];
-    service.getBooksWithLocation("Durham").subscribe(data => books = data);
-    const req = httpTestingController.expectOne(mediaUrl + "books/Durham");
+    service.getBooksWithLocation(durham).subscribe(data => books = data);
+    const req = httpTestingController.expectOne(booksDurham);
     // Request is GET
     expect(req.request.method).toEqual('GET');
     // Respond with mock data
@@ -328,8 +382,8 @@ describe('FidzulaService', () => {
 
   it('should return dvds with location Durham', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let dvds: Dvd[] = [];
-    service.getDvdsWithLocation("Durham").subscribe(data => dvds = data);
-    const req = httpTestingController.expectOne(mediaUrl + "dvds/Durham");
+    service.getDvdsWithLocation(durham).subscribe(data => dvds = data);
+    const req = httpTestingController.expectOne(dvdsDurham);
     // Request is GET
     expect(req.request.method).toEqual('GET');
     // Respond with mock data
@@ -347,8 +401,8 @@ describe('FidzulaService', () => {
 
   it('should return laptops with location Durham', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let laptops: Laptop[] = [];
-    service.getLaptopsWithLocation("Durham").subscribe(data => laptops = data);
-    const req = httpTestingController.expectOne(mediaUrl + "laptops/Durham");
+    service.getLaptopsWithLocation(durham).subscribe(data => laptops = data);
+    const req = httpTestingController.expectOne(laptopsDurham);
     // Request is GET
     expect(req.request.method).toEqual('GET');
     // Respond with mock data
@@ -365,10 +419,42 @@ describe('FidzulaService', () => {
   })));
 
   //team
+  it('should return team name for media', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+    let team: Team[] = [];
+    service.getTeam("media").subscribe(data => team[0] = data);
+    const req = httpTestingController.expectOne(mediaTeam);
+    // Request is GET
+    expect(req.request.method).toEqual('GET');
+    // Respond with mock data
+    req.flush(mockTeams[6]);
+    // Assert
+    httpTestingController.verify();
+    tick();
+    expect(team[0]).toBeTruthy();
+    expect(team[0].name).toBe('media');
+    expect(team[0].memberNames).toEqual([  'Pranav', 'Dev', 'Ty' ]);
+  })));
+
+  it('should return team name for fun', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
+    let team: Team[] = [];
+    service.getTeam("fun").subscribe(data => team[0] = data);
+    const req = httpTestingController.expectOne(funTeam);
+    // Request is GET
+    expect(req.request.method).toEqual('GET');
+    // Respond with mock data
+    req.flush(mockTeams[7]);
+    // Assert
+    httpTestingController.verify();
+    tick();
+    expect(team[0]).toBeTruthy();
+    expect(team[0].name).toBe('fun');
+    expect(team[0].memberNames).toEqual([  'Mike', 'Peter', 'Vahe' ]);
+  })));
+
   it('should return team name for food', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let team: Team[] = [];
     service.getTeam("food").subscribe(data => team[0] = data);
-    const req = httpTestingController.expectOne(infoUrl + "food/team");
+    const req = httpTestingController.expectOne(foodTeam);
     // Request is GET
     expect(req.request.method).toEqual('GET');
     // Respond with mock data
@@ -384,7 +470,7 @@ describe('FidzulaService', () => {
   it('should return team name for bikes', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let team: Team[] = [];
     service.getTeam("bikes").subscribe(data => team[0] = data);
-    const req = httpTestingController.expectOne(infoUrl + "bikes/team");
+    const req = httpTestingController.expectOne(bikesTeam);
     // Request is GET
     expect(req.request.method).toEqual('GET');
     // Respond with mock data
@@ -400,7 +486,7 @@ describe('FidzulaService', () => {
   it('should return team name for toys', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let team: Team[] = [];
     service.getTeam("toys").subscribe(data => team[0] = data);
-    const req = httpTestingController.expectOne(infoUrl + "toys/team");
+    const req = httpTestingController.expectOne(toysTeam);
     // Request is GET
     expect(req.request.method).toEqual('GET');
     // Respond with mock data
@@ -416,7 +502,7 @@ describe('FidzulaService', () => {
   it('should return team name for books', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let team: Team[] = [];
     service.getTeam("books").subscribe(data => team[0] = data);
-    const req = httpTestingController.expectOne(mediaUrl + "books/team");
+    const req = httpTestingController.expectOne(booksTeam);
     // Request is GET
     expect(req.request.method).toEqual('GET');
     // Respond with mock data
@@ -432,7 +518,7 @@ describe('FidzulaService', () => {
   it('should return team name for dvds', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let team: Team[] = [];
     service.getTeam("dvds").subscribe(data => team[0] = data);
-    const req = httpTestingController.expectOne(mediaUrl + "dvds/team");
+    const req = httpTestingController.expectOne(dvdsTeam);
     // Request is GET
     expect(req.request.method).toEqual('GET');
     // Respond with mock data
@@ -448,7 +534,7 @@ describe('FidzulaService', () => {
   it('should return team name for laptops', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let team: Team[] = [];
     service.getTeam("laptops").subscribe(data => team[0] = data);
-    const req = httpTestingController.expectOne(mediaUrl + "laptops/team");
+    const req = httpTestingController.expectOne(laptopsTeam);
     // Request is GET
     expect(req.request.method).toEqual('GET');
     // Respond with mock data
@@ -465,7 +551,7 @@ describe('FidzulaService', () => {
     try {
       let team: Team[] = [];
       service.getTeam("test").subscribe(data => team[0] = data);
-      const req = httpTestingController.expectOne(mediaUrl + "laptops/team");
+      const req = httpTestingController.expectOne(laptopsTeam);
       // Request is GET
       expect(req.request.method).toEqual('GET');
       // Respond with mock data
@@ -484,7 +570,7 @@ describe('FidzulaService', () => {
   it('should add a bike', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let bike: Bike[] = [];
     service.addBike(mockBikes[0]).subscribe(data => bike[0] = data);
-    const req = httpTestingController.expectOne(infoUrl + "bikes/add");
+    const req = httpTestingController.expectOne(bikesAdd);
     // Request is GET
     expect(req.request.method).toEqual('POST');
     // Respond with mock data
@@ -501,7 +587,7 @@ describe('FidzulaService', () => {
   it('should add food', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let food: Food[] = [];
     service.addFood(mockFoods[0]).subscribe(data => food[0] = data);
-    const req = httpTestingController.expectOne(infoUrl + "food/add");
+    const req = httpTestingController.expectOne(foodAdd);
     // Request is GET
     expect(req.request.method).toEqual('POST');
     // Respond with mock data
@@ -519,7 +605,7 @@ describe('FidzulaService', () => {
   it('should add toys', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let toy: Toy[] = [];
     service.addToy(mockToys[0]).subscribe(data => toy[0] = data);
-    const req = httpTestingController.expectOne(infoUrl + "toys/add");
+    const req = httpTestingController.expectOne(toysAdd);
     // Request is GET
     expect(req.request.method).toEqual('POST');
     // Respond with mock data
@@ -536,7 +622,7 @@ describe('FidzulaService', () => {
   it('should add book', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let book: Book[] = [];
     service.addBook(mockBooks[0]).subscribe(data => book[0] = data);
-    const req = httpTestingController.expectOne(mediaUrl + "books/add");
+    const req = httpTestingController.expectOne(booksAdd);
     // Request is GET
     expect(req.request.method).toEqual('POST');
     // Respond with mock data
@@ -555,7 +641,7 @@ describe('FidzulaService', () => {
   it('should add dvd', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let dvd: Dvd[] = [];
     service.addDvd(mockDvds[0]).subscribe(data => dvd[0] = data);
-    const req = httpTestingController.expectOne(mediaUrl + "dvds/add");
+    const req = httpTestingController.expectOne(dvdsAdd);
     // Request is GET
     expect(req.request.method).toEqual('POST');
     // Respond with mock data
@@ -574,7 +660,7 @@ describe('FidzulaService', () => {
   it('should add laptop', inject([FidzulaService], fakeAsync((service: FidzulaService) => {
     let laptop: Laptop[] = [];
     service.addLaptop(mockLaptops[0]).subscribe(data => laptop[0] = data);
-    const req = httpTestingController.expectOne(mediaUrl + "laptops/add");
+    const req = httpTestingController.expectOne(laptopsAdd);
     // Request is GET
     expect(req.request.method).toEqual('POST');
     // Respond with mock data
@@ -595,12 +681,12 @@ describe('FidzulaService', () => {
     let errorResp: HttpErrorResponse;
     let errorReply: string = "";
     const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-    service.getBikesWithLocation("Raleigh")
+    service.getBikesWithLocation(raleigh)
         .subscribe({
             next: () => fail('Should not succeed'),
             error: (e) => errorReply = e
         });
-    const req = httpTestingController.expectOne(infoUrl + "bikes/Raleigh");
+    const req = httpTestingController.expectOne(bikesRaleigh);
     // Assert that the request is a GET.
     expect(req.request.method).toEqual('GET');
     // Respond with error
@@ -622,12 +708,12 @@ describe('FidzulaService', () => {
     let errorResp: HttpErrorResponse;
     let errorReply: string = "";
     const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-    service.getFoodsWithLocation("Raleigh")
+    service.getFoodsWithLocation(durham)
         .subscribe({
             next: () => fail('Should not succeed'),
             error: (e) => errorReply = e
         });
-    const req = httpTestingController.expectOne(infoUrl + "food/Raleigh");
+    const req = httpTestingController.expectOne(foodDurham);
     // Assert that the request is a GET.
     expect(req.request.method).toEqual('GET');
     // Respond with error
@@ -649,12 +735,12 @@ describe('FidzulaService', () => {
     let errorResp: HttpErrorResponse;
     let errorReply: string = "";
     const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-    service.getToysWithLocation("Raleigh")
+    service.getToysWithLocation(durham)
         .subscribe({
             next: () => fail('Should not succeed'),
             error: (e) => errorReply = e
         });
-    const req = httpTestingController.expectOne(infoUrl + "toys/Raleigh");
+    const req = httpTestingController.expectOne(toysDurham);
     // Assert that the request is a GET.
     expect(req.request.method).toEqual('GET');
     // Respond with error
@@ -676,12 +762,12 @@ describe('FidzulaService', () => {
     let errorResp: HttpErrorResponse;
     let errorReply: string = "";
     const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-    service.getBooksWithLocation("Raleigh")
+    service.getBooksWithLocation(raleigh)
         .subscribe({
             next: () => fail('Should not succeed'),
             error: (e) => errorReply = e
         });
-    const req = httpTestingController.expectOne(mediaUrl + "books/Raleigh");
+    const req = httpTestingController.expectOne(booksRaleigh);
     // Assert that the request is a GET.
     expect(req.request.method).toEqual('GET');
     // Respond with error
@@ -703,12 +789,12 @@ describe('FidzulaService', () => {
     let errorResp: HttpErrorResponse;
     let errorReply: string = "";
     const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-    service.getDvdsWithLocation("Raleigh")
+    service.getDvdsWithLocation(durham)
         .subscribe({
             next: () => fail('Should not succeed'),
             error: (e) => errorReply = e
         });
-    const req = httpTestingController.expectOne(mediaUrl + "dvds/Raleigh");
+    const req = httpTestingController.expectOne(dvdsDurham);
     // Assert that the request is a GET.
     expect(req.request.method).toEqual('GET');
     // Respond with error
@@ -730,12 +816,12 @@ describe('FidzulaService', () => {
     let errorResp: HttpErrorResponse;
     let errorReply: string = "";
     const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-    service.getLaptopsWithLocation("Raleigh")
+    service.getLaptopsWithLocation(durham)
         .subscribe({
             next: () => fail('Should not succeed'),
             error: (e) => errorReply = e
         });
-    const req = httpTestingController.expectOne(mediaUrl + "laptops/Raleigh");
+    const req = httpTestingController.expectOne(laptopsDurham);
     // Assert that the request is a GET.
     expect(req.request.method).toEqual('GET');
     // Respond with error
@@ -758,12 +844,12 @@ describe('FidzulaService', () => {
       let errorResp: HttpErrorResponse;
       let errorReply: string = "";
       const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-      service.getBikesWithLocation("Raleigh")
+      service.getBikesWithLocation(raleigh)
           .subscribe({
               next: () => fail('Should not succeed'),
               error: (e) => errorReply = e
           });
-      const req = httpTestingController.expectOne(infoUrl + "bikes/Raleigh");
+      const req = httpTestingController.expectOne(bikesRaleigh);
       // Assert that the request is a GET.
       expect(req.request.method).toEqual('GET');
       // Create mock ErrorEvent, raised when something goes wrong at the network level.
@@ -786,12 +872,12 @@ describe('FidzulaService', () => {
     let errorResp: HttpErrorResponse;
     let errorReply: string = "";
     const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-    service.getFoodsWithLocation("Raleigh")
+    service.getFoodsWithLocation(durham)
         .subscribe({
             next: () => fail('Should not succeed'),
             error: (e) => errorReply = e
         });
-    const req = httpTestingController.expectOne(infoUrl + "food/Raleigh");
+    const req = httpTestingController.expectOne(foodDurham);
     // Assert that the request is a GET.
     expect(req.request.method).toEqual('GET');
     // Create mock ErrorEvent, raised when something goes wrong at the network level.
@@ -814,12 +900,12 @@ describe('FidzulaService', () => {
     let errorResp: HttpErrorResponse;
     let errorReply: string = "";
     const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-    service.getToysWithLocation("Raleigh")
+    service.getToysWithLocation(durham)
         .subscribe({
             next: () => fail('Should not succeed'),
             error: (e) => errorReply = e
         });
-    const req = httpTestingController.expectOne(infoUrl + "toys/Raleigh");
+    const req = httpTestingController.expectOne(toysDurham);
     // Assert that the request is a GET.
     expect(req.request.method).toEqual('GET');
     // Create mock ErrorEvent, raised when something goes wrong at the network level.
@@ -842,12 +928,12 @@ describe('FidzulaService', () => {
     let errorResp: HttpErrorResponse;
     let errorReply: string = "";
     const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-    service.getBooksWithLocation("Raleigh")
+    service.getBooksWithLocation(durham)
         .subscribe({
             next: () => fail('Should not succeed'),
             error: (e) => errorReply = e
         });
-    const req = httpTestingController.expectOne(mediaUrl + "books/Raleigh");
+    const req = httpTestingController.expectOne(booksDurham);
     // Assert that the request is a GET.
     expect(req.request.method).toEqual('GET');
     // Create mock ErrorEvent, raised when something goes wrong at the network level.
@@ -870,12 +956,12 @@ describe('FidzulaService', () => {
     let errorResp: HttpErrorResponse;
     let errorReply: string = "";
     const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-    service.getLaptopsWithLocation("Raleigh")
+    service.getLaptopsWithLocation(durham)
         .subscribe({
             next: () => fail('Should not succeed'),
             error: (e) => errorReply = e
         });
-    const req = httpTestingController.expectOne(mediaUrl + "laptops/Raleigh");
+    const req = httpTestingController.expectOne(laptopsDurham);
     // Assert that the request is a GET.
     expect(req.request.method).toEqual('GET');
     // Create mock ErrorEvent, raised when something goes wrong at the network level.
@@ -898,12 +984,12 @@ describe('FidzulaService', () => {
     let errorResp: HttpErrorResponse;
     let errorReply: string = "";
     const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-    service.getDvdsWithLocation("Raleigh")
+    service.getDvdsWithLocation(durham)
         .subscribe({
             next: () => fail('Should not succeed'),
             error: (e) => errorReply = e
         });
-    const req = httpTestingController.expectOne(mediaUrl + "dvds/Raleigh");
+    const req = httpTestingController.expectOne(dvdsDurham);
     // Assert that the request is a GET.
     expect(req.request.method).toEqual('GET');
     // Create mock ErrorEvent, raised when something goes wrong at the network level.
