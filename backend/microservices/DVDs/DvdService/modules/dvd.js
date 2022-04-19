@@ -16,6 +16,7 @@ exports.list = () => {
 };
 
 exports.query_with_salesTax = (param) => {
+  param = param.toLowerCase();
   let json_result = JSON.parse(read_json_file());
   console.log("query with salesTax: ");
   if (!LocationsalesTax.hasOwnProperty(param)) {
