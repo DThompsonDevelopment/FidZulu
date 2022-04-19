@@ -7,11 +7,11 @@ const url = require('url');
 let db = require('../data/toys.json');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/toys', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/toys/all/:location', (req, res, next) => {
+router.get('/all/:location', (req, res, next) => {
   const param = req.params.location;
   console.log('got into toys/all/:location ' + param);
 
@@ -24,28 +24,29 @@ router.get('/toys/all/:location', (req, res, next) => {
       result[i].prize = Math.round((result[i].prize * 1.075) * 100) / 100;
     }
     console.log(result);
-    res.send(result);
+    res.status(200).send(result);
   }
   else if(param == "durham") {
     for(let i = 0; i < result.length; i++){
       result[i].prize = Math.round((result[i].prize * 1.08) * 100) / 100;
     }
     console.log(result);
-    res.send(result);
+    //res.send(result);
+    res.status(200).send(result);
   } else {
     //next(createError(404));
     next(createError(404));
-    console.log("fail");
+    //console.log("fail");
   }
 });
 
-router.get('/toys/team', function(req, res) {
+router.get('/team', function(req, res) {
   let team = '[{"team" : "Toys", "membersNames":["Zach Schulman", "Thaddeus Tutka"]}]';
   const obj = JSON.parse(team);
   res.send(obj);
 });
 
-router.post('/toys/add', function(req, res) {
+router.post('/add', function(req, res) {
   let obj = req.body;
   res.status(201).send('made a new toy!');
   db.push(obj);
