@@ -1,0 +1,23 @@
+<header>
+  <h1>{{ title }}</h1>
+</header>
+<main>
+  <section>
+    <select class="services" [ngModel]="category" (ngModelChange)="onChangeCategory($event)">
+      <option [ngValue]="'bikes'">Bikes</option>
+      <option [ngValue]="'books'">Books</option>
+      <option [ngValue]="'dvds'">DVDs</option>
+      <option [ngValue]="'food'">Food</option>
+      <option [ngValue]="'laptops'">Laptops</option>
+      <option [ngValue]="'toys'">Toys</option>
+    </select>
+
+    <select class="locations" [ngModel]="location" (ngModelChange)="onChangeLocation($event)">
+      <option [ngValue]="'Raleigh'">Raleigh</option>
+      <option [ngValue]="'Durham'">Durham</option>
+    </select>
+
+    <app-table [items]="items"></app-table>
+  </section>
+  <app-team [team]="team"></app-team>
+</main>

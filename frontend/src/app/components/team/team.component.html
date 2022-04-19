@@ -1,0 +1,6 @@
+<section *ngIf="team">
+  <h2>Team</h2>
+  <ul>
+    <li *ngFor="let name of team.memberNames">{{ name }}</li>
+  </ul>
+</section>

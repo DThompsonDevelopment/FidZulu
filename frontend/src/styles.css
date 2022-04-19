@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+
+* {
+  font-family: "Fidelity Sans", Arial, sans-serif;
+  font-size: 1rem;
+  margin: 0.5rem;
+}
+
+section {
+  margin-bottom: 1rem;
+}
