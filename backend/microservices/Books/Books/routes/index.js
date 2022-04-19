@@ -64,13 +64,17 @@ router.get('/books/team', function(req, res) { //this is working
 });
 
 router.post('/books/add', function(req, res, next) {
+  /*
   let book = req.body;
   try {
     books.add_book(book);
-    
+
   } catch (err) {
     throw new Error("Unable to add",err);
   }
+  */
+ let book = req.body;
+ books.add_book(book);
 
 });
 
