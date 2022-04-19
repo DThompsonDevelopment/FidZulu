@@ -59,7 +59,7 @@ router.get('/books/all/Durham', (request, response, next) => {
 router.get('/books/team', function(req, res) { //this is working
   res.json({
     "team": "Book Team",
-    "membersNames": ["Swapnil Kha", "Eric Vo"]
+    "memberNames": ["Swapnil Kha", "Eric Vo"]
   });
 });
 

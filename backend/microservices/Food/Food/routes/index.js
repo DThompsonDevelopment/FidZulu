@@ -20,7 +20,7 @@ function readFoodDataSync() {
 }
 
 router.get('/food/team', (req, res, next) => {
-  res.json({ team: "Food", membersNames: ["Jon Riley, Dillon Gorlesky, Dakota Thompson"] });
+  res.json({ team: "Food", memberNames: ["Jon Riley, Dillon Gorlesky, Dakota Thompson"] });
 })
 
 function calculateTaxAndSendJSON(tax, res) {

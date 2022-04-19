@@ -10,13 +10,13 @@ exports.list = () => {
 };
 
 exports.tax = (toys, param) => {
-    if (param == "raleigh") {
+    if (param.toLowerCase() == "raleigh") {
         for(let i = 0; i < toys.length; i++){
             toys[i].price = Math.round((toys[i].price * 1.075) * 100) / 100;
         }
         return toys;
     }
-    else if(param == "durham") {
+    else if(param.toLowerCase()  == "durham") {
         for(let i = 0; i < toys.length; i++){
             toys[i].price = Math.round((toys[i].price * 1.08) * 100) / 100;
         }

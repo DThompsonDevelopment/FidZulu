@@ -8,9 +8,6 @@
   transition: 200ms ease-in-out;
 }
 
-.table:hover {
-  transform: scale(1.05);
-}
 
 th,
 td {

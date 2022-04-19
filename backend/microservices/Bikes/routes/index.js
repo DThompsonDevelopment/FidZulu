@@ -11,7 +11,7 @@ router.get("/bikes/all/:location", function (req, res, next) {
   const param = req.params.location;
 
   const bikes = getJSON(param, next);
-  res.send(applyTax(bikes, param));
+  res.send(applyTax(bikes, param.toLowerCase()));
 });
 
 router.get("/bikes/team", function (req, res, next) {
