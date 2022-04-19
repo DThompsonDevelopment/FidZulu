@@ -12,12 +12,6 @@ describe("Testing laptops Endpoints", () => {
     describe("GET media/laptops", () => {
         it("returns 400 on missing location", (done) => {
             request.get(base_url+'laptops', (error, response, body) => {
-                expect(response.statusCode).toBe(400);
-                done();
-            });
-        });
-        it("returns 404 on unknown arguments", (done) => {
-            request.get(base_url+'laptops/all/notreallocation', (error, response, body) => {
                 expect(response.statusCode).toBe(404);
                 done();
             });

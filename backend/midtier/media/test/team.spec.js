@@ -13,7 +13,9 @@ const expected = {
 describe('Testing Team Endpoint', () => {
     it('returns a list of team members', (done) => {
         request.get(base_url, (error, response, body) => {
-            expect(body).toBe(expected);
+            expect(body).toContain("Dev");
+            expect(body).toContain("Ty");
+            expect(body).toContain("Pranav");
             done();
         })
     })
