@@ -1,3 +1,4 @@
+const { Console } = require('console');
 const fs = require('fs');
 let read_json_file = () => {
     let file = './data/Booksjson.json';
@@ -45,5 +46,6 @@ exports.add_book = (body) => {
     list.push(body);
     list = JSON.stringify(list);
     fs.writeFileSync('./data/Booksjson.json', list);
+    return list;
 }
 
