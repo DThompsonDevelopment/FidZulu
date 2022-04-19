@@ -5,7 +5,7 @@ const team = {
   'membersnames': ['Vahe', 'Peter', 'Mike']
 };
 console.log("Starting test");
-describe("First Node Test Server", () => {
+xdescribe("First Node Test Server", () => {
   describe("GET /", () => {
     it("returns status code 200", (done) => {
       request.get(base_url + "team", (error, response, body) => {

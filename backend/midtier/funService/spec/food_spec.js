@@ -3,7 +3,7 @@ const base_url = "http://localhost:3021/fun/";
 const durham_url = base_url + "food/all/durham";
 const raleigh_url = base_url + "food/all/raleigh";
 
-describe("Testing Food Endpoint", () => {
+xdescribe("Testing Food Endpoint", () => {
 
   describe("GET fun/food", () => {
     it("returns 400 on missing location", (done) => {
