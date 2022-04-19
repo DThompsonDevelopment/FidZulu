@@ -67,5 +67,12 @@ describe("First Node Test Server", function () {
                 done();
             });
         });
+
+        it("returns status code 500 if city with tax not defined entered",  (done) => {
+            request.get(dvdslocation_url+'dallas' + "dvds", (error, response, body) => {
+                expect(response.statusCode).toBe(500);
+                done();
+            });
+        });
     });
 });

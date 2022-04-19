@@ -16,11 +16,13 @@ exports.list = () => {
 exports.query_with_salesTax = (param) => {
     let json_result = JSON.parse(read_json_file());
     console.log("query with salesTax: ");
+    if(!LocationsalesTax.hasOwnProperty(param)){
+      console.log("Entered city not  found");
+      throw new Error('City Tax Value not defined');
+    }
     json_result.forEach((dvd) => {
         let price = dvd.price * (1 + LocationsalesTax[param]);
         dvd.price = Math.round(price * 100) / 100;
       });
-
-    //console.log(json_result);
     return json_result;
 };
