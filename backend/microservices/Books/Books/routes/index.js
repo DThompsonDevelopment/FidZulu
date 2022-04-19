@@ -63,10 +63,11 @@ router.get('/books/team', function(req, res) { //this is working
   });
 });
 
-router.post('/books/add', function(req, res) {
+router.post('/books/add', function(req, res, next) {
   let book = req.body;
   try {
-    books.add_book(book)
+    books.add_book(book);
+    response.status(201).send();
   } catch (err) {
     next(createError(500));
   }
