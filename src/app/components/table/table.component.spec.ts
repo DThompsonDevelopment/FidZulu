@@ -72,24 +72,22 @@ describe('TableComponent', () => {
   });
 
   it('should reset keyOrder on change to []', () => {
-    const spy = spyOn(component, 'ngOnChanges').and.callThrough();
     component.items = [];
+    component.ngOnChanges();
     fixture.detectChanges();
     fixture.whenStable().then(() => {
-      expect(component.ngOnChanges).toHaveBeenCalled();
       expect(component.hasItems()).toBeFalse();
       expect(component.keyOrder).toBeUndefined();
     });
   });
 
   it('should set keyOrder on change to items', () => {
-    const spy = spyOn(component, 'ngOnChanges').and.callThrough();
-    component.items = [{ name: 'chris', location: 'place' }];
+    component.items = [{ foo: 'chris', bar: 'place' }];
+    component.ngOnChanges();
     fixture.detectChanges();
     fixture.whenStable().then(() => {
-      expect(component.ngOnChanges).toHaveBeenCalled();
       expect(component.hasItems()).toBeTrue();
-      expect(component.keyOrder).toBe(['name', 'location']);
+      expect(component.keyOrder).toEqual(['foo', 'bar']);
     });
   });
 });
