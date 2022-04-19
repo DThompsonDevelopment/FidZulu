@@ -44,6 +44,6 @@ exports.add_book = (body) => {
     let list = this.list();
     list.push(body);
     list = JSON.stringify(list);
-    fs.writeFileSync(file, list);
+    fs.writeFileSync('./data/Booksjson.json', list);
 }
 
