@@ -21,10 +21,10 @@ exports.calculateTax = (location) => {
 
 
     for (let i = 0; i < result.length; i++){
-        if(location === "Raleigh"){
+        if(location.toLowerCase() === "raleigh"){
             result[i].price *= 1.075;
         }
-        else if(location === "Durham"){
+        else if(location.toLowerCase() === "durham"){
             result[i].price *= 1.08;
         }
         else {
