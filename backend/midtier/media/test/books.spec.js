@@ -10,14 +10,8 @@ describe("Testing Books Endpoints", () => {
     //negative testing
     //bad requests returns 400
     describe("GET media/books", () => {
-        it("returns 400 on missing location", (done) => {
+        it("returns 404 on missing location", (done) => {
             request.get(base_url+'books', (error, response, body) => {
-                expect(response.statusCode).toBe(400);
-                done();
-            });
-        });
-        it("returns 404 on unknown arguments", (done) => {
-            request.get(base_url+'books/all/rhodeisland', (error, response, body) => {
                 expect(response.statusCode).toBe(404);
                 done();
             });

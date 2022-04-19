@@ -1,7 +1,7 @@
 const request = require("request");
 const base_url = 'http://localhost:3022/media/';
-const durham_url = base_url + 'books/all/durham';
-const raleigh_url = base_url + 'books/all/raleigh';
+const durham_url = base_url + 'laptops/all/durham';
+const raleigh_url = base_url + 'laptops/all/raleigh';
 
 
 
