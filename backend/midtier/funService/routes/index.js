@@ -34,5 +34,20 @@ router.get('/fun/toys/all/:location', async function(req, res, next) {
   res.end(JSON.stringify(endpoint_res.data));
 });
 
+router.get('/fun/toys/team', async function(req, res, next) {
+  let endpoint_res = await axios.get(path + '/toys/team');
+  res.end(JSON.stringify(endpoint_res.data));
+});
+
+router.get('/fun/food/team', async function(req, res, next) {
+  let endpoint_res = await axios.get(path + '/food/team');
+  res.end(JSON.stringify(endpoint_res.data));
+});
+
+router.get('/fun/bikes/team', async function(req, res, next) {
+  let endpoint_res = await axios.get(path + '/bikes/team');
+  res.end(JSON.stringify(endpoint_res.data));
+});
+
 console.log('Listening on port 3021');
 module.exports = router;
