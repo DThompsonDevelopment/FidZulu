@@ -1,16 +1,14 @@
 let request = require("request");
 const base_url = "http://localhost:3021/fun/";
 const teamtoys = {
-    "name" : "toys",
-    "memeberNames" : ["Thaddeus","Zack"]
+    "team":"Toys","membersNames":["Zach Schulman","Thaddeus Tutka"]
 }
 const teamfood = {
-    "name" : "food",
-    "memeberNames" : ["Dillon","Jon"]
+    "team":"Food",
+    "membersNames":["Jon Riley, Dillon Gorlesky, Dakota Thompson"]
 }
 const teambikes = {
-    "name" : "bikes",
-    "memeberNames" : ["Joey","Jimmy"]
+    "team":"bikes","memberNames":["Joseph Buono","Jimmy Lin"]
 }
 
 

@@ -6,7 +6,7 @@ const url = require('url');
 /* GET home page. */
 router.get('/fun/team', function(req, res, next) {
   const team = {
-    'team': 'Fun Team',
+    'team': 'Fun',
     'membersnames': ['Vahe', 'Peter', 'Mike']
 };
 res.end(JSON.stringify(team));
@@ -30,14 +30,15 @@ router.get('/fun/food/all/:location', async function(req, res, next) {
 });
 
 //toys endpoint
+const toysPath = "http://localhost:3033"
 router.get('/fun/toys/all/:location', async function(req, res, next) {
   const location = req.params.location
-  let endpoint_res = await axios.get(path + '/toys/all/' + location);
+  let endpoint_res = await axios.get(toysPath + '/toys/all/' + location);
   res.end(JSON.stringify(endpoint_res.data));
 });
 
 router.get('/fun/toys/team', async function(req, res, next) {
-  let endpoint_res = await axios.get(path + '/toys/team');
+  let endpoint_res = await axios.get(toysPath + '/toys/team');
   res.end(JSON.stringify(endpoint_res.data));
 });
 

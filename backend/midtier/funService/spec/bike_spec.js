@@ -7,7 +7,7 @@ describe("Testing Bikes Endpoint", () => {
 
   describe("GET fun/bikes", () => {
     it("returns 404 on missing location", (done) => {
-      request.get(base_url + "bikes", (error, response, body) => {
+      request.get(base_url + "bikes/all/", (error, response, body) => {
         expect(response.statusCode).toBe(404);
         done();
       });

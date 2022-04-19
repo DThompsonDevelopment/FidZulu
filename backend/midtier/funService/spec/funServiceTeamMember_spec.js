@@ -1,7 +1,7 @@
 let request = require("request");
 const base_url = "http://localhost:3021/fun/";
 const team = {
-  'team': 'Fun Team',
+  'team': 'Fun',
   'membersnames': ['Vahe', 'Peter', 'Mike']
 };
 console.log("Starting test");

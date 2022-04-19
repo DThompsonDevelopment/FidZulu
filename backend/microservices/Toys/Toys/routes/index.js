@@ -28,7 +28,7 @@ router.get('/all/:location', (req, res, next) => {
 });
 
 router.get('/team', function(req, res) {
-  let team = '[{"team" : "Toys", "membersNames":["Zach Schulman", "Thaddeus Tutka"]}]';
+  let team = '{"team" : "Toys", "membersNames":["Zach Schulman", "Thaddeus Tutka"]}';
   const obj = JSON.parse(team);
   res.send(obj);
 });
