@@ -21,7 +21,11 @@ router.get('/media/team', (req, res, next) => {
 router.get('/media/books/all/:location', async function(req, res, next) {
   const location = req.params.location
   let endpoint_res = await axios.get(path + '/books/all/' + location);
-  res.status(endpoint_res.status).end(JSON.stringify(endpoint_res.data));
+  let data_str = JSON.stringify(endpoint_res.data);
+  data_str = data_str.replaceAll('Title', 'title');
+  data_str = data_str.replaceAll('Author', 'author');
+  data_str = data_str.replaceAll('ISBN', 'isbn');
+  res.status(endpoint_res.status).end(data_str);
 });
 
 //dvds endpoint
@@ -35,7 +39,8 @@ router.get('/media/dvds/all/:location', async function(req, res, next) {
 router.get('/media/laptops/all/:location', async function(req, res, next) {
   const location = req.params.location
   let endpoint_res = await axios.get(path + '/laptops/all/' + location);
-  res.status(endpoint_res.status).end(JSON.stringify(endpoint_res.data));
+  res.status(endpoint_res.status).end(JSON.stringify(endpoint_res.data)
+    .replaceAll('CPU', 'cpu'));
 });
 
 console.log('Listening on port 3022');
